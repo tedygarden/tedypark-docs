@@ -12,8 +12,8 @@ This repository exists only for public-facing documentation such as:
 
 ## Recommended URL policy
 
-- `https://docs.tedypark.com/support/`
-- `https://docs.tedypark.com/legal/privacy/`
-- `https://docs.tedypark.com/legal/terms/`
+- `https://tedygarden.github.io/tedypark-docs/support/`
+- `https://tedygarden.github.io/tedypark-docs/legal/privacy/`
+- `https://tedygarden.github.io/tedypark-docs/legal/terms/`
 
 App-specific product pages should live in a separate repository.
