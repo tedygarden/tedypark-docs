@@ -1,0 +1,90 @@
+:root {
+  color-scheme: light;
+  --bg: #f5f1ea;
+  --surface: rgba(255, 252, 247, 0.92);
+  --text: #1f2521;
+  --muted: #5f6962;
+  --line: rgba(31, 37, 33, 0.12);
+  --accent: #1a6a51;
+  --shadow: 0 18px 48px rgba(20, 28, 24, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  background:
+    radial-gradient(circle at top left, rgba(219, 236, 225, 0.88), transparent 28%),
+    linear-gradient(180deg, #f5f1ea 0%, #fcfaf6 100%);
+  color: var(--text);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.shell {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 28px 18px 72px;
+}
+
+.doc {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 28px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+h1 {
+  margin: 0 0 14px;
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1;
+}
+
+h2 {
+  margin-top: 30px;
+  font-size: 22px;
+}
+
+p, li {
+  line-height: 1.75;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+@media (max-width: 640px) {
+  .shell {
+    padding: 16px 12px 48px;
+  }
+
+  .doc {
+    padding: 20px;
+    border-radius: 18px;
+  }
+}
