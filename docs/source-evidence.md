@@ -27,7 +27,7 @@
 
 | 앱 / 번들 ID | 확인한 경계 | 주요 근거 |
 |---|---|---|
-| Asanagram / `app.tedypark.asanagram` | Asana PAT는 iCloud Keychain, 피드 캐시는 로컬, 개인 상태는 private CloudKit, 선택적 macOS AI는 설치된 CLI 경유 | `asanagram-sol/README.md`, `Asanagram.entitlements`, `Sources/Kit/AIService.swift`, `FeedStore+Sync.swift` |
+| Asanagram / `app.tedypark.asanagram` | Asana PAT는 Keychain, 피드 캐시는 로컬, 개인 상태는 private CloudKit, 선택적 macOS AI는 설치된 CLI 경유. Core Spotlight는 기기별 기본 OFF opt-in이며 같은 도메인을 삭제 후 최대 2,000개로 교체 | `asanagram-sol/README.md`, `Asanagram.entitlements`, `Sources/Kit/AIService.swift`, `FeedStore+Sync.swift`, `Spotlight.swift`, `SpotlightPrivacyPolicy.swift`, `FeedStore.swift`, `TokenStore.swift`, `RootView.swift` |
 | 마당 / `app.tedypark.heimdall` | 공개 커뮤니티 URLSession·WKWebView, 기본 WebKit 쿠키, 글 보관본 로컬+private CloudKit, 개발자 백엔드 없음 | `heimdall-sol/docs/specs/0002-cloudkit-sync.md`, `0006-sol-reader-hardening.md`, `SiteRegistry.swift`, `WebFallbackView.swift` |
 | 목소리 / `app.tedypark.moksori` | 시스템·Personal Voice는 기기, 문구·히스토리는 SwiftData/App Group, opt-in 때 문장을 Bing speech endpoint로 보내고 MP3 캐시 | `moksori-sol/docs/privacy-contract.md`, `docs/release/privacy-review-checklist.md`, `EdgeTTS.swift`, 앱 Privacy manifest |
 | Walkmin / `com.tedypark.walkmin.walklab` | Core Motion·사용 중 위치·PhotoKit·로컬 알림·Game Center, 게임/걸음은 로컬, 위치 자취는 메모리 | `picmin-sol/Docs/Reports/2026-07-14-sol-privacy-contract.md`, `WalkLocationProvider.swift`, `GameCenterService.swift`, Privacy manifest |
@@ -62,6 +62,7 @@
 7. **Apple private 데이터 삭제 UX**
    - Asanagram·마당·Quad Do의 전체 로컬/Keychain/private CloudKit 삭제 기능 부재를 제품 백로그 P0/P1로 유지한다.
    - 앱 삭제만으로 private CloudKit·Keychain 자료도 삭제된다고 안내하지 않는다.
+   - Asanagram의 Core Spotlight 기본 OFF·동의·삭제·재시도·토큰 교체 경로는 시뮬레이터 단위 테스트만으로 완료로 간주하지 않고, 실제 iOS·macOS 기기에서 색인 생성·만료·삭제와 검색 결과 열기 차단을 확인한다.
 8. **최종 법률·문안 검토**
    - 실제 수집 항목, 목적, 제3자, 보관, 삭제, 정보주체 권리, 아동·국외 이전 고지를 운영 증거와 대조한다.
    - 개인정보보호 책임자 표시, 처리 기한, 이전 국가, DPA 또는 보안 보증은 증거와 법적 검토 없이 추가하지 않는다.

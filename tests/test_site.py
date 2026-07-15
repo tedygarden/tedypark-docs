@@ -184,20 +184,55 @@ class GeneratedSiteTests(unittest.TestCase):
         self.assertNotIn("https://www.apple.com/legal/privacy/ko/", generated)
         self.assertIn("https://www.apple.com/legal/privacy/kr/", generated)
 
-    def test_asanagram_discloses_full_content_spotlight_and_missing_cleanup(self) -> None:
+    def test_asanagram_spotlight_is_opt_in_bounded_reconciled_and_deletable(self) -> None:
         privacy = (SITE / "asanagram/privacy/index.html").read_text(encoding="utf-8")
         deletion = (SITE / "asanagram/data-deletion/index.html").read_text(encoding="utf-8")
+        support = (SITE / "asanagram/support/index.html").read_text(encoding="utf-8")
+        rendered = "\n".join((privacy, deletion, support))
         for required in (
             "태스크 이름·설명",
             "댓글 본문",
             "AI 생성 결과",
+            "기본적으로 꺼져",
+            "iCloud로 동기화되지 않습니다",
+            "명시적으로 켜고",
+            "사용 가능한 Asana 토큰",
             "최대 2,000개",
             "Core Spotlight",
-            "만료일 없이",
+            "태스크 이름·본문·댓글",
+            "활동·작성자·프로젝트",
+            "Asana 링크",
+            "중복을 제거",
         ):
             self.assertIn(required, privacy)
-        for required in ("Core Spotlight", "색인 전체 삭제 버튼", "opt-in"):
+        for required in (
+            "앱 시작·새로고침·더 불러오기",
+            "삭제를 먼저 요청",
+            "조정 시점부터 30일",
+            "비동기 요청",
+            "실제 기기",
+            "기기 로컬 opt-out",
+            "토큰을 교체하거나",
+            "직렬 처리",
+            "삭제 요청으로 수렴",
+            "다음 앱 시작·새로고침 같은 후속 조정에서 다시 시도",
+            "현재·이전 서비스 이름의 Keychain",
+            "ASANA_PAT",
+            ".env 자동 사용",
+            "명시적 토큰 저장 전까지 계속 차단",
+            "외부 환경변수나 .env 파일 자체를 지울 수 없",
+            "Spotlight 검색 결과의 열기 요청도 무시",
+            "한 번에 모두 지우는 기능이 없습니다",
+        ):
             self.assertIn(required, deletion)
+        self.assertIn("삭제 실패 문구", support)
+        for stale in (
+            "Core Spotlight에 자동 색인",
+            "만료일 없이",
+            "색인 전체 삭제 버튼이 없습니다",
+            "opt-in 또는 앱 안 전체 삭제 기능이 없습니다",
+        ):
+            self.assertNotIn(stale, rendered)
 
     def test_moksori_discloses_opt_in_transfer_and_release_blocker(self) -> None:
         text = (SITE / "moksori/privacy/index.html").read_text(encoding="utf-8")
