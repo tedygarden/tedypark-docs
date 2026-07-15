@@ -1,0 +1,443 @@
+{
+  "site_title": "tedyway 앱 정책·지원",
+  "operator": "tedyway 운영자",
+  "contact": "hi.k.ai@icloud.com",
+  "effective_date": "2026-07-15",
+  "apps": [
+    {
+      "slug": "asanagram",
+      "aliases": [],
+      "name": "Asanagram",
+      "bundle_id": "app.tedypark.asanagram",
+      "platforms": "iOS · macOS",
+      "tagline": "Asana의 업무 활동을 개인 피드로 정리하는 앱",
+      "overview": "Asana에서 사용자가 볼 수 있는 태스크, 댓글, 반응과 팀 활동을 불러와 읽음 상태·북마크·개인 그룹과 함께 보여줍니다.",
+      "account": "tedyway 자체 계정은 만들지 않습니다. Asana 계정과 Personal Access Token(PAT)이 필요하며, 기기 간 동기화를 켜면 사용자의 Apple ID가 사용됩니다.",
+      "local_data": [
+        "Asana 태스크 이름·설명, 댓글 본문, 작성자·담당자·프로젝트·첨부·반응 정보와 AI 생성 결과를 포함한 화면 표시용 캐시",
+        "읽음 기록, 최근 본 항목, 북마크, 고정한 사람·그룹과 앱 설정",
+        "macOS Application Support의 캐시와 기기 내 UserDefaults 폴백",
+        "최대 2,000개 피드 항목의 태스크 이름·설명·댓글을 Core Spotlight에 자동 색인해 iOS·macOS 시스템 검색에서 찾을 수 있게 합니다. 현재 색인은 만료일 없이 생성됩니다."
+      ],
+      "apple_services": [
+        "PAT는 Apple Keychain의 동기화 항목으로 저장될 수 있습니다.",
+        "읽음·고정·그룹·북마크 상태는 사용자의 private CloudKit 데이터베이스와 iCloud KVS에 동기화될 수 있습니다.",
+        "private CloudKit 데이터는 해당 Apple ID의 영역이며 tedyway 운영자가 일반 서비스 DB처럼 조회하거나 직접 지울 수 없습니다."
+      ],
+      "external_services": [
+        "Asana API: PAT 권한 범위 안의 워크스페이스·사용자·팀과 태스크 이름·설명, 댓글 본문, 첨부·반응 정보를 조회하고, 사용자가 명시적으로 실행한 댓글·좋아요·완료 등의 작업을 반영합니다.",
+        "선택적 macOS AI: 사용자가 별도 동의하고 기능을 실행하면 태스크·댓글 맥락이 기기에 설치된 Claude, Codex 또는 Gemini CLI로 전달됩니다. 실제 처리는 사용자가 선택한 Anthropic, OpenAI 또는 Google CLI의 로그인·설정과 해당 제공자 정책을 따릅니다.",
+        "고급 설정에서 사용자가 별도 백엔드 URL을 지정한 경우 Asana 요청이 그 주소를 경유할 수 있습니다. 기본 경로는 Asana API 직접 연결입니다."
+      ],
+      "retention": [
+        "로컬 캐시는 앱 기능 제공과 오프라인 표시를 위해 기기에 남으며 앱 삭제 또는 해당 저장소 정리의 영향을 받습니다.",
+        "일부 읽음 항목은 앱 정책상 60일·최대 5,000개로 정리되지만, 다른 북마크·그룹·캐시 전체에 동일한 기간을 약속하지 않습니다.",
+        "Core Spotlight 색인은 현재 만료일 없이 남으며 앱에 명시적 색인 전체 삭제·재조정 기능이 없습니다.",
+        "Asana 원본 데이터와 선택한 AI 제공자의 처리는 각 제공자 정책을 따릅니다. tedyway 운영자가 그 보관 기간을 대신 보증하지 않습니다."
+      ],
+      "deletion_steps": [
+        "앱 설정에서 ‘토큰 삭제’를 실행하고 Asana 개발자 설정에서도 해당 PAT를 폐기합니다.",
+        "앱에서 북마크·그룹·최근 본 기록처럼 개별 삭제 기능이 있는 항목을 정리합니다.",
+        "시스템 검색에 태스크 내용이 노출될 수 있으므로 앱 삭제 뒤에도 Spotlight 결과가 남는지 확인합니다. 현재 앱 안에는 색인 전체 삭제 버튼이 없습니다.",
+        "기기의 앱을 삭제하면 앱 컨테이너의 로컬 캐시는 더 이상 앱에서 사용할 수 없습니다.",
+        "private CloudKit와 iCloud Keychain 자료까지 정리하려면 Apple ID의 iCloud·암호 및 키체인 설정에서 해당 앱 데이터를 별도로 확인합니다."
+      ],
+      "deletion_limits": [
+        "현재 앱에는 로컬·Core Spotlight·Keychain·iCloud KVS·private CloudKit 데이터를 한 번에 모두 지우는 기능이 없습니다.",
+        "Core Spotlight에는 태스크 이름·설명·댓글이 시스템 검색용으로 자동 색인되며, opt-in 또는 앱 안 전체 삭제 기능이 없습니다.",
+        "앱 삭제만으로 Keychain 또는 private CloudKit 데이터까지 삭제됐다고 간주하면 안 됩니다.",
+        "Asana에 원래 존재하는 태스크·댓글은 Asana에서 관리해야 하며, 지원 메일로 private CloudKit 또는 Asana 계정 데이터를 대신 삭제할 수 없습니다."
+      ],
+      "support_notes": [
+        "문의 메일에 PAT, 회사 기밀, 태스크 본문이나 인증 토큰을 넣지 마세요.",
+        "Asana 권한 오류는 PAT가 해당 워크스페이스를 볼 수 있는지와 토큰 폐기 여부를 먼저 확인해 주세요.",
+        "iPhone↔Mac 동기화 문제는 두 기기의 Apple ID·iCloud 상태와 앱 버전을 함께 알려 주세요."
+      ],
+      "evidence": [
+        ".worktrees/asanagram-sol/README.md",
+        ".worktrees/asanagram-sol/Asanagram.entitlements",
+        ".worktrees/asanagram-sol/Sources/Kit/AIService.swift",
+        ".worktrees/asanagram-sol/Sources/Kit/FeedStore+Sync.swift",
+        ".worktrees/asanagram-sol/Sources/Kit/Spotlight.swift"
+      ]
+    },
+    {
+      "slug": "madang",
+      "aliases": [
+        "heimdall"
+      ],
+      "name": "마당",
+      "bundle_id": "app.tedypark.heimdall",
+      "platforms": "iOS",
+      "tagline": "여러 공개 커뮤니티를 한 곳에서 읽는 리더",
+      "overview": "공개 커뮤니티의 게시판 목록과 글·댓글을 불러와 읽은 시점의 보관본, 최근 기록과 북마크를 제공합니다. Heimdall은 같은 앱의 개발·기존 이름입니다.",
+      "account": "tedyway 자체 계정과 개발자 운영 백엔드가 없습니다. iCloud 동기화를 쓰는 경우 사용자의 Apple ID가 사용됩니다. 앱 안 웹 화면에서 각 커뮤니티에 로그인하면 그 로그인은 해당 사이트와 WebKit의 영역입니다.",
+      "local_data": [
+        "읽은 공개 글의 제목·작성자 표시명·본문 HTML·댓글·원문 URL·조회 시각과 북마크 상태",
+        "앱 설정, 최근 선택과 WebKit 웹사이트 데이터·쿠키",
+        "비북마크 보관본은 최신순 최대 500개를 유지하지만 북마크 보관본에는 같은 개수 상한을 적용하지 않습니다."
+      ],
+      "apple_services": [
+        "글·댓글 보관본과 북마크 상태는 사용자의 private CloudKit 데이터베이스에 동기화될 수 있습니다.",
+        "iCloud를 사용할 수 없으면 로컬 JSON 저장소만으로 동작합니다.",
+        "private CloudKit 데이터는 해당 Apple ID의 영역이며 tedyway 운영자가 일반 서비스 DB처럼 조회하거나 직접 지울 수 없습니다."
+      ],
+      "external_services": [
+        "클리앙, 디시인사이드, FM코리아, 뽐뿌, MLBPARK 등 지원 커뮤니티에 URLSession 또는 WKWebView로 직접 접속합니다.",
+        "웹 전용 소스에는 루리웹, 보배드림, SLR클럽, 인벤, 오늘의유머, 웃긴대학, DVDPrime, 더쿠 등이 포함될 수 있습니다.",
+        "각 사이트는 요청 과정에서 IP 주소, User-Agent, 쿠키와 사이트 로그인 정보를 자체 정책에 따라 처리할 수 있습니다. 앱은 기본 WebKit 데이터 저장소를 쓰므로 웹 쿠키가 기기에 남을 수 있습니다."
+      ],
+      "retention": [
+        "로컬 보관본은 사용자가 앱을 삭제하거나 개별 북마크를 해제하더라도 최근 읽음 보관 정책에 따라 남을 수 있습니다.",
+        "private CloudKit 보관본은 사용자의 iCloud 영역에 남을 수 있으며 앱 삭제만으로 삭제됐다고 단정하지 않습니다.",
+        "공개 커뮤니티 원문과 웹 계정·쿠키의 서버 측 처리는 각 커뮤니티 정책을 따릅니다."
+      ],
+      "deletion_steps": [
+        "앱에서 해제할 수 있는 북마크를 먼저 해제합니다.",
+        "앱 안 웹 로그인을 사용했다면 해당 커뮤니티에서 로그아웃하고, 필요하면 iOS의 웹사이트 데이터 관련 설정도 확인합니다.",
+        "앱을 삭제해 로컬 앱 컨테이너를 제거합니다.",
+        "private CloudKit 자료까지 정리하려면 Apple ID의 iCloud 저장 공간에서 해당 앱 데이터를 별도로 확인합니다."
+      ],
+      "deletion_limits": [
+        "현재 앱에는 모든 글 보관본과 private CloudKit 레코드를 한 번에 지우는 사용자 화면이 없습니다.",
+        "앱 삭제가 iCloud 데이터 삭제를 의미하지 않습니다.",
+        "원문 게시물·댓글 또는 커뮤니티 계정은 해당 사이트에서 삭제해야 하며 tedyway 운영자는 그 계정에 접근할 수 없습니다."
+      ],
+      "support_notes": [
+        "문의 시 문제가 난 커뮤니티 이름, 게시판, 앱 버전과 재현 시각을 알려 주세요.",
+        "비밀번호, 사이트 세션 쿠키, 비공개 글 전문은 보내지 마세요.",
+        "외부 사이트의 약관·차단·HTML 변경에 따라 일부 소스가 일시적으로 열리지 않을 수 있습니다."
+      ],
+      "evidence": [
+        ".worktrees/heimdall-sol/docs/specs/0002-cloudkit-sync.md",
+        ".worktrees/heimdall-sol/docs/specs/0006-sol-reader-hardening.md",
+        ".worktrees/heimdall-sol/Heimdall/Sources/Adapters/SiteRegistry.swift",
+        ".worktrees/heimdall-sol/Heimdall/Sources/Views/WebFallbackView.swift"
+      ]
+    },
+    {
+      "slug": "moksori",
+      "aliases": [],
+      "name": "목소리",
+      "bundle_id": "app.tedypark.moksori",
+      "platforms": "iOS",
+      "tagline": "입력한 문장을 대신 읽어 주는 말하기 보조 앱",
+      "overview": "시스템 음성 또는 사용자가 기기에서 만든 Personal Voice로 문장을 읽고, 선택적으로 온라인 신경망 음성을 사용할 수 있습니다.",
+      "account": "계정을 만들지 않으며 tedyway 서버도 사용하지 않습니다. 마이크·연락처·위치 권한을 요청하지 않습니다.",
+      "notice": "온라인 음성은 실험적 비공식 연동입니다. 독립 앱에서 speech.platform.bing.com을 사용할 수 있는지, 전송 데이터의 실제 보관·처리 범위가 확인되지 않았습니다. 이 근거가 해결되지 않으면 프로덕션에서 온라인 음성을 제거하거나 비활성화해야 하며, 해결 전 프로덕션 출시는 차단됩니다.",
+      "local_data": [
+        "사용자가 입력·저장한 문구, 호칭, 말하기 히스토리와 재생 횟수",
+        "음성·속도·음높이·개인정보 선택 등 설정과 위젯용 App Group 스냅샷",
+        "온라인 합성으로 받은 MP3 캐시. 파일 보호가 적용된 Caches 영역에 저장됩니다."
+      ],
+      "apple_services": [
+        "기본 시스템 음성은 AVSpeechSynthesizer로 기기에서 처리됩니다.",
+        "Personal Voice는 사용자가 Apple 설정에서 만든 음성을 권한 허용 후 사용하며 Apple이 기기에서 관리합니다.",
+        "위젯은 App Group의 로컬 스냅샷을 읽으며 iCloud 동기화는 사용하지 않습니다."
+      ],
+      "external_services": [
+        "사용자가 현재 고지를 확인하고 명시적으로 동의해 온라인 음성을 켠 경우에만 실제 재생 문장 전체를 speech.platform.bing.com으로 전송합니다.",
+        "전송 문장에는 직접 입력한 본문뿐 아니라 활성 호칭, 저장 문구, 히스토리 다시 말하기 내용이 포함될 수 있습니다.",
+        "앱은 계정·광고 식별자·연락처·위치를 payload에 추가하지 않지만 Microsoft 측은 IP 주소와 요청 메타데이터를 처리할 수 있습니다. 정확한 보관 기간과 이용 범위는 확인되지 않았습니다."
+      ],
+      "retention": [
+        "문구와 히스토리는 사용자가 앱에서 지우거나 앱 데이터가 제거될 때까지 기기에 남습니다.",
+        "온라인 MP3 캐시는 설정의 캐시 삭제 기능으로 지울 수 있습니다.",
+        "Microsoft에 이미 전송된 문장·네트워크 정보의 보관 기간은 확인되지 않았으므로 즉시 삭제된다고 주장하지 않습니다."
+      ],
+      "deletion_steps": [
+        "설정에서 온라인 음성을 끄면 진행 중 합성을 취소하고 다시 켤 때 재동의를 요구합니다.",
+        "설정에서 ‘온라인 음성 캐시 삭제’를 실행합니다.",
+        "히스토리는 전체 삭제 또는 개별 삭제하고, 저장 문구·호칭도 앱에서 삭제합니다.",
+        "남은 로컬 앱 데이터를 더 이상 쓰지 않으려면 앱과 위젯을 삭제합니다."
+      ],
+      "deletion_limits": [
+        "계정과 tedyway 서버 저장본은 없으므로 운영자에게 계정 삭제를 요청할 대상이 없습니다.",
+        "이미 Microsoft로 전송된 문장은 앱 캐시 삭제로 회수되지 않으며 tedyway 운영자가 대신 삭제할 수 없습니다.",
+        "Microsoft 처리·보관 범위와 비공식 endpoint 사용 권한은 프로덕션 출시 전 수동 확인 게이트입니다."
+      ],
+      "support_notes": [
+        "온라인 음성은 기본으로 꺼져 있습니다. 원치 않으면 ‘오프라인으로 시작’을 선택해 주세요.",
+        "문의 시 실제 사적인 문장 대신 같은 오류가 나는 임의의 짧은 예문을 보내 주세요.",
+        "Personal Voice는 iOS 설정의 생성·허용 상태를 먼저 확인해 주세요."
+      ],
+      "evidence": [
+        ".worktrees/moksori-sol/docs/privacy-contract.md",
+        ".worktrees/moksori-sol/docs/release/privacy-review-checklist.md",
+        ".worktrees/moksori-sol/Moksori/Sources/EdgeTTS.swift",
+        ".worktrees/moksori-sol/Moksori/Resources/PrivacyInfo.xcprivacy"
+      ]
+    },
+    {
+      "slug": "walkmin",
+      "aliases": [],
+      "name": "Walkmin",
+      "bundle_id": "com.tedypark.walkmin.walklab",
+      "platforms": "iOS",
+      "tagline": "걸음으로 진행하는 수집·산책 게임",
+      "overview": "오늘의 걸음 수를 게임 진행에 반영하고, 사용자가 선택하면 지도·사진·알림·Game Center 기능을 제공합니다.",
+      "account": "tedyway 자체 계정, 개발자 운영 서버, 광고 계정은 없습니다. Game Center를 쓰는 경우 사용자의 Apple 계정이 사용됩니다.",
+      "local_data": [
+        "게임 상태, 오늘·주간 걸음 합계, 14일까지의 일일 기록과 설정을 Application Support·UserDefaults에 저장합니다.",
+        "위치 권한을 켜고 지도 화면을 사용하는 동안 산책 자취와 발견 지점을 메모리에서 계산합니다. 현재 구현은 좌표·경로를 영구 저장하지 않습니다.",
+        "PhotoKit으로 날짜별 사진의 썸네일을 표시하지만 원본을 복사·수정·업로드하지 않습니다."
+      ],
+      "apple_services": [
+        "Core Motion에서 걸음 수를 읽고 Core Location에서 사용 중 위치를 받습니다.",
+        "PhotoKit은 사용자가 허용한 사진을 조회하고, 로컬 알림은 저녁 산책 알림을 기기에 예약합니다.",
+        "Game Center에 로그인한 사용자는 총 걸음·주간 걸음 점수를 Apple 리더보드에 제출할 수 있습니다. tedyway 운영자 서버는 점수나 Game Center 계정을 받지 않습니다."
+      ],
+      "external_services": [
+        "현재 검증한 앱 런타임에는 개발자 운영 서버, 제3자 광고·분석 SDK로 게임·위치·사진 데이터를 보내는 경로가 없습니다.",
+        "MapKit, Core Motion, PhotoKit, 알림과 Game Center는 Apple 서비스 경계에서 동작하며 Apple 정책과 사용자 기기 설정을 따릅니다."
+      ],
+      "retention": [
+        "게임·걸음 상태는 사용자가 게임을 초기화하거나 로컬 앱 데이터가 제거될 때까지 기기에 남습니다.",
+        "위치 자취는 현재 세션 메모리에만 있고 영구 저장하지 않습니다.",
+        "사진 원본과 Game Center 리더보드 기록은 앱 로컬 데이터가 아니며 각각 사진 보관함과 Apple Game Center에서 관리됩니다."
+      ],
+      "deletion_steps": [
+        "앱의 ‘초기화’로 저장된 게임 상태를 새 상태로 바꿉니다.",
+        "저녁 알림을 끄고 iOS 설정에서 Motion·위치·사진 권한을 철회합니다.",
+        "앱을 삭제해 남은 로컬 앱 컨테이너를 제거합니다.",
+        "Game Center 점수·계정 자료는 Apple의 Game Center 설정과 지원 경로에서 별도로 관리합니다."
+      ],
+      "deletion_limits": [
+        "앱 초기화는 사진 보관함 원본이나 Apple Game Center 자료를 삭제하지 않습니다.",
+        "앱 삭제도 Game Center 리더보드 기록 삭제를 의미하지 않습니다.",
+        "tedyway 운영자는 Apple 계정 경계의 Game Center 데이터를 직접 조회·삭제할 수 없습니다."
+      ],
+      "support_notes": [
+        "문의 시 기기 모델, iOS 버전, 앱 버전과 Motion·위치·사진·Game Center 중 어떤 기능인지 알려 주세요.",
+        "사진 원본, 정확한 위치 좌표나 Apple 계정 정보는 보내지 마세요.",
+        "권한을 거부해도 관련 선택 기능만 제한되며 게임의 로컬 기본 상태는 사용할 수 있습니다."
+      ],
+      "evidence": [
+        ".worktrees/picmin-sol/Docs/AppStore/privacy-policy-ko.md",
+        ".worktrees/picmin-sol/Docs/Reports/2026-07-14-sol-privacy-contract.md",
+        ".worktrees/picmin-sol/Walkmin/Sources/Support/WalkLocationProvider.swift",
+        ".worktrees/picmin-sol/Walkmin/Sources/Support/GameCenterService.swift"
+      ]
+    },
+    {
+      "slug": "quaddo",
+      "aliases": [],
+      "name": "Quad Do",
+      "bundle_id": "app.tedypark.quaddo",
+      "platforms": "iOS · macOS",
+      "tagline": "동시에 할 일을 두 개로 좁히는 실행 관리 앱",
+      "overview": "할 일과 메모를 Eisenhower Matrix로 정리하고 Focus에는 최대 두 개의 실행 항목을 둡니다. 위젯과 선택적 Apple Reminders 연동을 제공합니다.",
+      "account": "tedyway 자체 계정은 만들지 않습니다. 기기 간 동기화를 사용할 때 사용자의 Apple ID와 private CloudKit이 사용됩니다.",
+      "local_data": [
+        "할 일 제목·메모·사분면·마감일·Focus/완료 상태·변경 시각과 연결된 Reminder 식별자",
+        "SwiftData 저장소, 앱·위젯 App Group 복사본, 설정과 Keychain의 임의 사용자 UUID",
+        "StoreKit 구매·후원 기능을 표시하기 위한 로컬 거래 상태"
+      ],
+      "apple_services": [
+        "SwiftData 자료는 iCloud를 사용할 수 있을 때 사용자의 private CloudKit 데이터베이스와 동기화됩니다. 사용할 수 없으면 로컬 저장소로 계속 동작합니다.",
+        "사용자가 허용한 경우 Apple Reminders에 QuadDo 목록과 알림을 만들고 갱신·삭제합니다.",
+        "WidgetKit, App Group, Push/CloudKit, Keychain과 StoreKit은 Apple 서비스 경계에서 동작합니다."
+      ],
+      "external_services": [
+        "Firebase Remote Config 의존 코드가 있지만 GoogleService-Info.plist가 빌드에 포함된 경우에만 초기화됩니다. 현재 저장소에는 실제 설정 파일이 없으며, 할 일 본문을 Remote Config로 보내는 코드는 확인되지 않았습니다.",
+        "실제 배포 바이너리에 Google 설정을 넣는 경우 Firebase의 진단·설치 관련 처리와 App Store 개인정보 답변을 다시 검증해야 합니다.",
+        "광고·사용자 프로파일링 목적의 외부 전송은 현재 검증 범위에서 확인되지 않았습니다."
+      ],
+      "retention": [
+        "할 일은 사용자가 개별 삭제하거나 앱 저장소가 제거될 때까지 로컬 및 동기화 저장소에 남을 수 있습니다.",
+        "private CloudKit 자료, iCloud 동기화 Keychain UUID와 Reminders 항목은 앱 삭제 뒤에도 각 Apple 서비스에 남을 수 있습니다.",
+        "StoreKit 거래 기록은 Apple 계정·App Store 경계에서 관리됩니다."
+      ],
+      "deletion_steps": [
+        "앱에서 필요 없는 할 일을 개별 삭제합니다. Reminders 연동 항목은 Apple Reminders에서도 결과를 확인합니다.",
+        "설정에서 Reminders 접근을 끄고 시스템 설정에서 권한을 철회합니다.",
+        "앱과 위젯을 삭제해 로컬 App Group·앱 컨테이너 사용을 중단합니다.",
+        "private CloudKit, Keychain과 Reminders 자료는 Apple ID의 iCloud·암호 및 키체인·미리 알림 설정에서 별도로 확인합니다."
+      ],
+      "deletion_limits": [
+        "현재 앱에는 모든 로컬·App Group·Keychain·private CloudKit 자료를 한 번에 지우는 기능이 없습니다.",
+        "앱 삭제만으로 iCloud·Keychain·Reminders·StoreKit 자료까지 삭제됐다고 간주하면 안 됩니다.",
+        "tedyway 운영자는 사용자의 private CloudKit 데이터베이스나 Apple 계정 자료를 일반 서비스 DB처럼 직접 삭제할 수 없습니다."
+      ],
+      "support_notes": [
+        "문의 시 할 일 본문 대신 재현용 임의 제목을 사용하고 민감 메모를 보내지 마세요.",
+        "iCloud 문제는 Apple ID 로그인 상태, iPhone·Mac 앱 버전과 문제가 난 방향을 알려 주세요.",
+        "Reminders 문제는 QuadDo 목록 존재 여부와 시스템 권한 상태를 함께 확인해 주세요."
+      ],
+      "evidence": [
+        ".worktrees/quaddo-sol/README.md",
+        ".worktrees/quaddo-sol/docs/privacy-policy.md",
+        ".worktrees/quaddo-sol/QuadDo/QuadDo.entitlements",
+        ".worktrees/quaddo-sol/QuadDo/Infrastructure/RemoteConfig/FirebaseBootstrap.swift"
+      ]
+    },
+    {
+      "slug": "seoulbuilder",
+      "aliases": [
+        "seoul-builder"
+      ],
+      "name": "SeoulBuilder",
+      "bundle_id": "app.tedypark.seoulbuilder",
+      "platforms": "iOS",
+      "tagline": "서울·수도권 실지형 위 도시 건설 게임",
+      "overview": "앱에 포함된 지형 데이터를 이용해 자연 지형을 보존하며 도시를 건설합니다. 사용자가 허용하면 현재 위치에 가까운 수록 지도를 제안합니다.",
+      "account": "계정과 개발자 운영 서버가 없습니다. 현재 검증한 앱 런타임은 네트워크 요청을 하지 않습니다.",
+      "local_data": [
+        "도시 건설 상태를 앱 Documents의 JSON 저장 파일에 보관합니다.",
+        "스테이지 별점·진행도를 UserDefaults에 보관합니다.",
+        "사용 중 위치 권한으로 약 100m 정확도의 현재 좌표를 한 번 받아 가까운 수록 지도와 위치 핀을 계산하며, 좌표는 현재 구현에서 파일로 저장하지 않습니다."
+      ],
+      "apple_services": [
+        "Core Location 권한은 ‘내 동네에서 시작’ 제안에만 사용합니다.",
+        "iCloud, CloudKit, Game Center 또는 외부 분석 서비스는 현재 앱 런타임에 연결되어 있지 않습니다."
+      ],
+      "external_services": [
+        "현재 검증한 앱 런타임에는 개발자 서버나 제3자 네트워크 전송 경로가 없습니다.",
+        "지도 제작 도구는 개발 단계에서 OpenStreetMap·AWS Terrain Tiles 데이터를 사용하지만, 이 도구는 배포 앱에서 실행되지 않으며 사용자 위치를 보내지 않습니다."
+      ],
+      "retention": [
+        "게임 저장 파일과 별점은 사용자가 저장 슬롯을 덮어쓰거나 앱의 로컬 데이터가 제거될 때까지 기기에 남습니다.",
+        "현재 위치는 메모리에서만 사용하고 게임 저장 파일에 넣지 않습니다.",
+        "정확한 위치 권한 기록과 권한 선택은 iOS 시스템 설정에서 관리됩니다."
+      ],
+      "deletion_steps": [
+        "iOS 설정에서 SeoulBuilder의 위치 권한을 ‘안 함’으로 바꿉니다.",
+        "현재 앱에는 저장된 도시와 별점을 지우는 사용자 화면이 없으므로, 모든 로컬 자료를 정리하려면 앱을 삭제합니다.",
+        "기기 백업에서 앱을 복원하면 운영체제 백업 정책에 따라 로컬 자료가 다시 복원될 수 있으므로 Apple의 백업 설정도 함께 확인합니다."
+      ],
+      "deletion_limits": [
+        "현재 사용자 화면에는 도시 저장 파일이나 별점을 개별 또는 전체 삭제하는 기능이 없습니다.",
+        "앱 삭제는 현재 좌표를 외부 서버에서 지우는 절차가 아닙니다. 현재 구현은 좌표를 서버나 저장 파일에 보내지 않습니다.",
+        "앱 계정과 운영자 서버 저장본은 없으므로 이메일 계정 삭제 대상은 없습니다."
+      ],
+      "support_notes": [
+        "문의 시 지도 이름, 게임 모드, 기기 모델, iOS·앱 버전과 재현 단계를 알려 주세요.",
+        "정확한 위치 좌표나 집 주소는 보내지 마세요.",
+        "위치 권한을 거부해도 수록 지도는 직접 선택할 수 있습니다."
+      ],
+      "evidence": [
+        ".worktrees/seoul-builder-sol/README.md",
+        ".worktrees/seoul-builder-sol/Projects/SeoulBuilder/Project.swift",
+        ".worktrees/seoul-builder-sol/Projects/SeoulBuilder/Sources/Model/LocationService.swift",
+        ".worktrees/seoul-builder-sol/Projects/SeoulBuilder/Sources/Model/CitySave.swift"
+      ]
+    },
+    {
+      "slug": "oneulai",
+      "aliases": [],
+      "name": "오늘아이",
+      "bundle_id": "app.tedypark.oneulai",
+      "platforms": "iOS",
+      "tagline": "보호자가 아이의 하루를 기록하고 AI로 정리하는 내부 베타 앱",
+      "overview": "보호자가 선택한 사진·동영상과 아이 프로필을 이용해 하루 기록과 AI 분석 결과를 만듭니다. AI 결과는 참고 정보이며 의료 진단이 아닙니다.",
+      "account": "Sign in with Apple 또는 이메일 기반 계정을 사용하며 Supabase Auth에서 인증합니다. 아동은 직접 계정을 만들 수 없고, 성인 보호자가 자신의 계정으로 동의 후 관리해야 합니다.",
+      "notice": "이 문서는 다음 sol 후보의 계약입니다. 현재 내부 TestFlight 1.0 (260613.203453)은 이전 구현으로, 앱에서 Gemini에 직접 미디어를 보내고 Firebase Remote Config를 초기화할 수 있어 이 문서와 동일한 흐름으로 간주하면 안 됩니다. 새 입력을 중지하고 legacy build를 회수하거나 별도 정책으로 덮은 뒤 검증해야 합니다. 동영상 임시 Storage 고아 객체 정리와 계정 삭제 purge worker의 E2E 증거도 없으므로 새 TestFlight·App Store 업로드를 모두 차단합니다.",
+      "local_data": [
+        "기기 사진 보관함의 원본은 Apple Photos에 남고, 앱은 권한 범위에서 선택한 미디어와 로컬 식별자·촬영 시각·포함된 GPS 메타데이터를 읽습니다.",
+        "앱 설정, 인증 세션, 화면 캐시와 분석 진행 상태 일부가 기기 저장소·Keychain에 남을 수 있습니다.",
+        "삭제 요청이 접수되면 앱은 로그아웃과 로컬 정리를 시도하며, 정리 오류를 완료로 숨기지 않습니다."
+      ],
+      "apple_services": [
+        "Sign in with Apple, Photos와 iCloud 공유 보관함, APNS 푸시, StoreKit 구매 기능을 사용할 수 있습니다.",
+        "iCloud 공유 보관함은 Apple이 운영하며 앱이 접근한 미디어도 사용자가 시작한 분석에서는 같은 Supabase Edge·Gemini 경로로 처리됩니다.",
+        "사진 보관함 원본 삭제, Apple 계정과 App Store 거래 관리는 Apple 서비스 경계에서 이뤄집니다."
+      ],
+      "external_services": [
+        "현재 활성 내부 TestFlight 1.0 (260613.203453)은 다음 sol 후보보다 오래된 legacy build입니다. 선택한 미디어를 앱에서 Google Gemini로 직접 보낼 수 있고 Firebase Remote Config를 초기화할 수 있으므로, 회수·만료 또는 별도 검증 전에는 새 개인정보를 입력하지 않습니다.",
+        "Supabase Auth·Database: 이메일 또는 Sign in with Apple 계정 식별·인증 상태, 아이 이름·생년월일, 가족 공간·구성원, 보호자 동의, 촬영 시각·포함된 GPS 같은 미디어 메타데이터, AI 결과, 이용 이벤트·오류, 기기·APNS 정보와 구매·구독 상태를 인증·저장·조회합니다.",
+        "Supabase Edge Functions: 인증·소유권·현재 보호자 동의·삭제 계정 상태를 확인하고 AI 요청을 중계합니다. 사진은 인증된 분석 요청에 포함되어 Gemini로 전달되며 Supabase Storage에 별도 원본 객체로 저장하지 않습니다.",
+        "Supabase Storage: 동영상을 인증된 사용자 경로에 임시 업로드합니다. 정상·오류 처리 끝에 삭제를 시도하지만 실패·중단으로 남은 객체 정리와 완전 삭제는 아직 처음부터 끝까지 검증되지 않았습니다.",
+        "Google Gemini: 사용자가 분석을 시작한 사진·동영상, 필요한 아이 맥락과 프롬프트를 받아 AI 결과를 만듭니다. 정확한 제공자 보관 기간은 최종 계약·정책 검토 전 단정하지 않습니다."
+      ],
+      "retention": [
+        "계정·아이·가족·동의·AI 결과·이벤트·기기 자료는 기능 제공과 삭제 요청 처리에 필요한 동안 Supabase에 남을 수 있습니다. 항목별 확정 보관 기간과 운영 삭제 완료 기한은 아직 법무·운영 검증되지 않아 약속하지 않습니다.",
+        "동영상은 분석을 위한 임시 Storage 객체이며 처리 종료 시 삭제를 시도합니다. 하지만 실패·중단된 객체의 정리와 계정 삭제 때의 전체 purge가 검증되지 않아 즉시 삭제를 주장하지 않습니다.",
+        "Google, Apple, Supabase가 자체적으로 처리하는 로그·거래·네트워크 정보는 각 제공자 정책을 따르며, tedyway 운영자가 확인하지 않은 국가·기간을 이 문서에서 추정하지 않습니다."
+      ],
+      "deletion_steps": [
+        "로그인한 앱의 설정에서 ‘계정 및 아이 데이터 삭제 요청’을 시작하고 확인합니다. 일반 경로는 이메일만 보내는 방식이 아닙니다.",
+        "서버가 요청을 접수(HTTP 202)하면 계정은 AI 처리·데이터 변경·푸시 대상에서 동결되고, 앱은 로그아웃과 로컬 정리를 시도합니다.",
+        "요청 상태나 앱 접근 문제가 있으면 같은 Apple 로그인 또는 가입 이메일을 식별할 수 있는 최소 정보로 지원 메일에 문의합니다. 비밀번호·인증 토큰·아동 미디어는 보내지 않습니다.",
+        "Apple Photos 원본, iCloud 공유 보관함, Sign in with Apple 연결과 App Store 구매 내역은 각각 Apple 설정에서 별도로 관리합니다."
+      ],
+      "deletion_limits": [
+        "현재 요청 수락은 삭제 완료가 아닙니다. 서버 실제 삭제 작업(purge worker), 실패 재시도·실패대기열(dead-letter), 모든 테이블·Storage·Auth 삭제의 운영 증거가 아직 없습니다.",
+        "따라서 즉시 삭제, 고정 완료 기한 또는 모든 백업·제공자 로그의 삭제를 보장하지 않습니다.",
+        "legacy TestFlight 회수·정책 정합성, 실제 E2E 증거와 수동 법무 검토가 끝날 때까지 새 TestFlight·App Store 업로드를 모두 차단합니다."
+      ],
+      "support_notes": [
+        "계정 삭제는 먼저 앱 설정에서 시작합니다. 메일은 상태 확인·접근 복구·권리 문의를 위한 보조 채널입니다.",
+        "문의 메일에 아이 사진·영상, 생년월일, 정확한 위치, 비밀번호나 인증 토큰을 첨부하지 마세요.",
+        "AI 결과는 의료·발달 진단이 아니며 건강 우려가 있으면 적절한 전문가와 상담하세요."
+      ],
+      "evidence": [
+        ".worktrees/onl-ai-sol/docs/audits/2026-07-15-sol-ai-proxy-privacy.md",
+        ".worktrees/onl-ai-sol/Projects/NetworkKit/Sources/APIEndpoints.swift",
+        ".worktrees/onl-ai-sol/supabase/functions/request-account-deletion/index.ts",
+        ".worktrees/onl-ai-sol/supabase/functions/analyze-child-video/index.ts"
+      ],
+      "terms": [
+        {
+          "title": "1. 적용 범위",
+          "paragraphs": [
+            "이 약관은 tedyway 운영자가 제공하는 오늘아이 앱과 관련 백엔드의 이용 조건을 설명합니다. 오늘아이는 현재 내부 베타이며, 프로덕션 제공을 뜻하지 않습니다."
+          ]
+        },
+        {
+          "title": "2. 이용 자격과 보호자 책임",
+          "items": [
+            "이용자는 성인이며 등록할 아이의 법정대리인 또는 적법한 동의 권한이 있는 보호자여야 합니다.",
+            "아동은 자신의 계정으로 서비스를 이용하지 않습니다.",
+            "다른 사람의 아이·사진·영상을 권한 없이 등록하거나 분석해서는 안 됩니다."
+          ]
+        },
+        {
+          "title": "3. 서비스와 AI 결과",
+          "items": [
+            "오늘아이는 사용자가 선택한 미디어와 입력 정보를 AI로 정리해 일기·요약·참고 정보를 제공합니다.",
+            "AI 결과는 오류나 누락이 있을 수 있으며 의료·발달·교육 진단이나 전문가 의견을 대체하지 않습니다.",
+            "건강·안전과 관련한 판단은 앱 결과만으로 내리지 말고 적절한 전문가에게 확인해야 합니다."
+          ]
+        },
+        {
+          "title": "4. 계정과 데이터",
+          "items": [
+            "로그인·아동 데이터·가족 공유·외부 처리와 삭제 경계는 개인정보처리방침을 따릅니다.",
+            "사용자는 계정과 인증 수단을 안전하게 관리하고 잘못된 접근이 의심되면 지원 채널로 알려야 합니다.",
+            "계정 삭제는 앱 설정에서 시작합니다. 현재 완전 purge는 운영 검증 전이므로 삭제 요청 수락을 완료로 보지 않습니다."
+          ]
+        },
+        {
+          "title": "5. 미디어와 금지 행위",
+          "items": [
+            "이용자는 업로드·분석할 미디어에 필요한 권리를 가지고 있어야 합니다.",
+            "불법 콘텐츠, 아동 착취·학대 콘텐츠, 타인 계정 침해, 서비스 방해 또는 자동화된 과도한 요청은 허용되지 않습니다.",
+            "위험을 방지하거나 법적 의무를 이행하기 위해 필요한 범위에서 기능 또는 계정 이용을 제한할 수 있습니다."
+          ]
+        },
+        {
+          "title": "6. 구매와 Apple 서비스",
+          "items": [
+            "유료 기능이 제공되는 경우 가격과 조건은 구매 화면에 표시합니다.",
+            "결제·구독·환불은 Apple App Store와 StoreKit 경계에서 처리되며 Apple 정책과 사용자 계정 설정을 따릅니다.",
+            "Sign in with Apple, Photos, iCloud 공유 보관함과 APNS에는 Apple의 조건도 적용됩니다."
+          ]
+        },
+        {
+          "title": "7. 베타 상태와 변경",
+          "items": [
+            "내부 베타에서는 기능이 바뀌거나 중단될 수 있고 데이터 마이그레이션이 필요할 수 있습니다.",
+            "아동 데이터, 임시 동영상, 계정 삭제처럼 중요한 처리 방식이 바뀌면 앱과 공개 정책을 함께 갱신해야 합니다.",
+            "legacy TestFlight 회수·정책 정합성, 삭제 E2E와 운영·법무 게이트를 통과하기 전에는 새 TestFlight·App Store 업로드를 하지 않습니다."
+          ]
+        },
+        {
+          "title": "8. 문의",
+          "paragraphs": [
+            "지원과 권리 문의는 hi.k.ai@icloud.com으로 받습니다. 계정 삭제의 일반 시작점은 앱 설정이며 이메일이 유일한 삭제 수단은 아닙니다."
+          ]
+        }
+      ]
+    }
+  ]
+}

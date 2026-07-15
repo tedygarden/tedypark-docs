@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Quad Do 계정·로컬·Apple·외부 데이터 삭제 경계" />
+    <title>Quad Do 데이터 삭제 안내</title>
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <!-- Generated from content/apps.json; edit the source, not this file. -->
+    <main class="shell">
+      <article class="doc">
+<p class="eyebrow">Quad Do · Deletion</p>
+<h1>데이터 삭제 안내</h1>
+<p class="summary"><strong>계정 상태:</strong> tedyway 자체 계정은 만들지 않습니다. 기기 간 동기화를 사용할 때 사용자의 Apple ID와 private CloudKit이 사용됩니다.</p>
+
+<dl class="metadata"><div><dt>앱</dt><dd>Quad Do</dd></div><div><dt>번들 ID</dt><dd>app.tedypark.quaddo</dd></div><div><dt>플랫폼</dt><dd>iOS · macOS</dd></div><div><dt>운영 주체</dt><dd>tedyway 운영자</dd></div><div><dt>시행일</dt><dd>2026-07-15</dd></div></dl>
+<h2>삭제·정리 순서</h2>
+<ol><li>앱에서 필요 없는 할 일을 개별 삭제합니다. Reminders 연동 항목은 Apple Reminders에서도 결과를 확인합니다.</li><li>설정에서 Reminders 접근을 끄고 시스템 설정에서 권한을 철회합니다.</li><li>앱과 위젯을 삭제해 로컬 App Group·앱 컨테이너 사용을 중단합니다.</li><li>private CloudKit, Keychain과 Reminders 자료는 Apple ID의 iCloud·암호 및 키체인·미리 알림 설정에서 별도로 확인합니다.</li></ol>
+<h2>삭제되지 않거나 별도 조치가 필요한 영역</h2>
+<ul><li>현재 앱에는 모든 로컬·App Group·Keychain·private CloudKit 자료를 한 번에 지우는 기능이 없습니다.</li><li>앱 삭제만으로 iCloud·Keychain·Reminders·StoreKit 자료까지 삭제됐다고 간주하면 안 됩니다.</li><li>tedyway 운영자는 사용자의 private CloudKit 데이터베이스나 Apple 계정 자료를 일반 서비스 DB처럼 직접 삭제할 수 없습니다.</li></ul>
+<h2>보관 경계</h2>
+<ul><li>할 일은 사용자가 개별 삭제하거나 앱 저장소가 제거될 때까지 로컬 및 동기화 저장소에 남을 수 있습니다.</li><li>private CloudKit 자료, iCloud 동기화 Keychain UUID와 Reminders 항목은 앱 삭제 뒤에도 각 Apple 서비스에 남을 수 있습니다.</li><li>StoreKit 거래 기록은 Apple 계정·App Store 경계에서 관리됩니다.</li></ul>
+<h2>지원</h2>
+<p>상태 확인이나 접근 문제는 <a href="mailto:hi.k.ai@icloud.com">hi.k.ai@icloud.com</a>으로 문의하세요. 메일에는 비밀번호, 인증 토큰, 정확한 위치, 아동 미디어 또는 업무 원문을 넣지 마세요.</p>
+<p class="muted">서비스 계정이 없는 앱은 이메일로 ‘계정 삭제’를 요청할 대상이 없습니다. Apple 또는 외부 제공자가 직접 관리하는 영역과 앱 로컬 자료는 운영자 서버와 서로 분리될 수 있습니다. 이 앱에 해당하는 범위는 위 안내를 따르세요.</p>
+<nav class="nav" aria-label="문서 탐색"><a href="../">앱 안내</a><a href="../privacy/">개인정보처리방침</a><a href="../support/">지원</a><a href="./">데이터 삭제</a><a href="../../">전체 앱</a></nav>
+<footer>tedyway 운영자 · 시행일 2026-07-15</footer>
+</article>
+    </main>
+  </body>
+</html>
