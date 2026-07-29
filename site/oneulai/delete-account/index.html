@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="오늘아이 계정·로컬·Apple·외부 데이터 삭제 경계" />
+    <title>오늘아이 계정 및 데이터 삭제</title>
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <!-- Generated from content/apps.json; edit the source, not this file. -->
+    <main class="shell">
+      <article class="doc">
+<p class="eyebrow">오늘아이 · Deletion</p>
+<h1>계정 및 데이터 삭제</h1>
+<p class="summary"><strong>계정 상태:</strong> Sign in with Apple 또는 이메일 기반 계정을 사용하며 Supabase Auth에서 인증합니다. 아동은 직접 계정을 만들 수 없고, 성인 보호자가 자신의 계정으로 동의 후 관리해야 합니다.</p>
+<aside class="notice" role="note"><strong>출시 상태 고지</strong><p>이 문서는 다음 sol 후보의 계약입니다. 현재 내부 TestFlight 1.0 (260613.203453)은 이전 구현으로, 앱에서 Gemini에 직접 미디어를 보내고 Firebase Remote Config를 초기화할 수 있어 이 문서와 동일한 흐름으로 간주하면 안 됩니다. 새 입력을 중지하고 legacy build를 회수하거나 별도 정책으로 덮은 뒤 검증해야 합니다. 동영상 임시 Storage 고아 객체 정리와 계정 삭제 purge worker의 E2E 증거도 없으므로 새 TestFlight·App Store 업로드를 모두 차단합니다.</p></aside>
+<dl class="metadata"><div><dt>앱</dt><dd>오늘아이</dd></div><div><dt>번들 ID</dt><dd>app.tedypark.oneulai</dd></div><div><dt>플랫폼</dt><dd>iOS</dd></div><div><dt>운영 주체</dt><dd>tedyway 운영자</dd></div><div><dt>시행일</dt><dd>2026-07-15</dd></div></dl>
+<h2>삭제·정리 순서</h2>
+<ol><li>로그인한 앱의 설정에서 ‘계정 및 아이 데이터 삭제 요청’을 시작하고 확인합니다. 일반 경로는 이메일만 보내는 방식이 아닙니다.</li><li>서버가 요청을 접수(HTTP 202)하면 계정은 AI 처리·데이터 변경·푸시 대상에서 동결되고, 앱은 로그아웃과 로컬 정리를 시도합니다.</li><li>요청 상태나 앱 접근 문제가 있으면 같은 Apple 로그인 또는 가입 이메일을 식별할 수 있는 최소 정보로 지원 메일에 문의합니다. 비밀번호·인증 토큰·아동 미디어는 보내지 않습니다.</li><li>Apple Photos 원본, iCloud 공유 보관함, Sign in with Apple 연결과 App Store 구매 내역은 각각 Apple 설정에서 별도로 관리합니다.</li></ol>
+<h2>삭제되지 않거나 별도 조치가 필요한 영역</h2>
+<ul><li>현재 요청 수락은 삭제 완료가 아닙니다. 서버 실제 삭제 작업(purge worker), 실패 재시도·실패대기열(dead-letter), 모든 테이블·Storage·Auth 삭제의 운영 증거가 아직 없습니다.</li><li>따라서 즉시 삭제, 고정 완료 기한 또는 모든 백업·제공자 로그의 삭제를 보장하지 않습니다.</li><li>legacy TestFlight 회수·정책 정합성, 실제 E2E 증거와 수동 법무 검토가 끝날 때까지 새 TestFlight·App Store 업로드를 모두 차단합니다.</li></ul>
+<h2>보관 경계</h2>
+<ul><li>계정·아이·가족·동의·AI 결과·이벤트·기기 자료는 기능 제공과 삭제 요청 처리에 필요한 동안 Supabase에 남을 수 있습니다. 항목별 확정 보관 기간과 운영 삭제 완료 기한은 아직 법무·운영 검증되지 않아 약속하지 않습니다.</li><li>동영상은 분석을 위한 임시 Storage 객체이며 처리 종료 시 삭제를 시도합니다. 하지만 실패·중단된 객체의 정리와 계정 삭제 때의 전체 purge가 검증되지 않아 즉시 삭제를 주장하지 않습니다.</li><li>Google, Apple, Supabase가 자체적으로 처리하는 로그·거래·네트워크 정보는 각 제공자 정책을 따르며, tedyway 운영자가 확인하지 않은 국가·기간을 이 문서에서 추정하지 않습니다.</li></ul>
+<h2>지원</h2>
+<p>상태 확인이나 접근 문제는 <a href="mailto:hi.k.ai@icloud.com">hi.k.ai@icloud.com</a>으로 문의하세요. 메일에는 비밀번호, 인증 토큰, 정확한 위치, 아동 미디어 또는 업무 원문을 넣지 마세요.</p>
+<p class="muted">서비스 계정이 없는 앱은 이메일로 ‘계정 삭제’를 요청할 대상이 없습니다. Apple 또는 외부 제공자가 직접 관리하는 영역과 앱 로컬 자료는 운영자 서버와 서로 분리될 수 있습니다. 이 앱에 해당하는 범위는 위 안내를 따르세요.</p>
+<nav class="nav" aria-label="문서 탐색"><a href="../">앱 안내</a><a href="../privacy/">개인정보처리방침</a><a href="../terms/">이용약관</a><a href="../support/">지원</a><a href="./">데이터 삭제</a><a href="../../">전체 앱</a></nav>
+<footer>tedyway 운영자 · 시행일 2026-07-15</footer>
+</article>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="마당 개인정보 처리와 삭제 경계" />
+    <title>마당 개인정보처리방침</title>
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <!-- Generated from content/apps.json; edit the source, not this file. -->
+    <main class="shell">
+      <article class="doc">
+<p class="eyebrow">마당 · Privacy</p>
+<h1>개인정보처리방침</h1>
+<p class="summary"><strong>요약:</strong> 이 문서는 마당의 현재 구현에서 데이터가 기기, Apple 서비스, 외부 제공자 중 어디에서 처리되는지 구분합니다. 확인되지 않은 보관 기간이나 삭제 보장은 만들지 않습니다.</p>
+
+<dl class="metadata"><div><dt>앱</dt><dd>마당</dd></div><div><dt>번들 ID</dt><dd>app.tedypark.heimdall</dd></div><div><dt>플랫폼</dt><dd>iOS</dd></div><div><dt>운영 주체</dt><dd>tedyway 운영자</dd></div><div><dt>시행일</dt><dd>2026-07-15</dd></div></dl>
+<h2>1. 적용 범위와 계정</h2>
+<p>공개 커뮤니티의 게시판 목록과 글·댓글을 불러와 읽은 시점의 보관본, 최근 기록과 북마크를 제공합니다. Heimdall은 같은 앱의 개발·기존 이름입니다.</p>
+<p>tedyway 자체 계정과 개발자 운영 백엔드가 없습니다. iCloud 동기화를 쓰는 경우 사용자의 Apple ID가 사용됩니다. 앱 안 웹 화면에서 각 커뮤니티에 로그인하면 그 로그인은 해당 사이트와 WebKit의 영역입니다.</p>
+<h2>2. 기기에서 처리·보관하는 데이터</h2>
+<ul><li>읽은 공개 글의 제목·작성자 표시명·본문 HTML·댓글·원문 URL·조회 시각과 북마크 상태</li><li>앱 설정, 최근 선택과 WebKit 웹사이트 데이터·쿠키</li><li>비북마크 보관본은 최신순 최대 500개를 유지하지만 북마크 보관본에는 같은 개수 상한을 적용하지 않습니다.</li></ul>
+<h2>3. Apple 서비스와 private 데이터 경계</h2>
+<ul><li>글·댓글 보관본과 북마크 상태는 사용자의 private CloudKit 데이터베이스에 동기화될 수 있습니다.</li><li>iCloud를 사용할 수 없으면 로컬 JSON 저장소만으로 동작합니다.</li><li>private CloudKit 데이터는 해당 Apple ID의 영역이며 tedyway 운영자가 일반 서비스 DB처럼 조회하거나 직접 지울 수 없습니다.</li></ul>
+<h2>4. 외부 서비스와 전송</h2>
+<ul><li>클리앙, 디시인사이드, FM코리아, 뽐뿌, MLBPARK 등 지원 커뮤니티에 URLSession 또는 WKWebView로 직접 접속합니다.</li><li>웹 전용 소스에는 루리웹, 보배드림, SLR클럽, 인벤, 오늘의유머, 웃긴대학, DVDPrime, 더쿠 등이 포함될 수 있습니다.</li><li>각 사이트는 요청 과정에서 IP 주소, User-Agent, 쿠키와 사이트 로그인 정보를 자체 정책에 따라 처리할 수 있습니다. 앱은 기본 WebKit 데이터 저장소를 쓰므로 웹 쿠키가 기기에 남을 수 있습니다.</li></ul>
+<p class="source-links">제공자 문서: <a href="https://www.apple.com/legal/privacy/kr/" rel="noopener noreferrer">Apple 개인정보 보호</a></p>
+<h2>5. 이용 목적</h2>
+<p>위 데이터는 각 항목에 적은 앱 기능과 사용자의 선택을 처리하는 데 사용됩니다. 이 앱에 존재하지 않는 계정·동기화 목적이나 현재 구현에서 확인되지 않은 광고·추적·판매 목적을 이 문서가 새로 부여하지 않습니다.</p>
+<h2>6. 보관</h2>
+<ul><li>로컬 보관본은 사용자가 앱을 삭제하거나 개별 북마크를 해제하더라도 최근 읽음 보관 정책에 따라 남을 수 있습니다.</li><li>private CloudKit 보관본은 사용자의 iCloud 영역에 남을 수 있으며 앱 삭제만으로 삭제됐다고 단정하지 않습니다.</li><li>공개 커뮤니티 원문과 웹 계정·쿠키의 서버 측 처리는 각 커뮤니티 정책을 따릅니다.</li></ul>
+<h2>7. 삭제와 사용자 선택</h2>
+<ul><li>앱에서 해제할 수 있는 북마크를 먼저 해제합니다.</li><li>앱 안 웹 로그인을 사용했다면 해당 커뮤니티에서 로그아웃하고, 필요하면 iOS의 웹사이트 데이터 관련 설정도 확인합니다.</li><li>앱을 삭제해 로컬 앱 컨테이너를 제거합니다.</li><li>private CloudKit 자료까지 정리하려면 Apple ID의 iCloud 저장 공간에서 해당 앱 데이터를 별도로 확인합니다.</li></ul>
+<ul><li>현재 앱에는 모든 글 보관본과 private CloudKit 레코드를 한 번에 지우는 사용자 화면이 없습니다.</li><li>앱 삭제가 iCloud 데이터 삭제를 의미하지 않습니다.</li><li>원문 게시물·댓글 또는 커뮤니티 계정은 해당 사이트에서 삭제해야 하며 tedyway 운영자는 그 계정에 접근할 수 없습니다.</li></ul>
+<p><a class="button-link" href="../data-deletion/">데이터 삭제 안내 보기</a></p>
+<h2>8. 권리와 문의</h2>
+<p>사용자는 적용되는 법령에 따라 자신의 정보에 대한 열람, 정정·삭제, 처리 정지 또는 동의 철회를 문의할 수 있습니다. Apple 또는 위에 적은 외부 제공자가 직접 관리하는 영역은 해당 제공자의 설정과 정책도 함께 사용해야 합니다.</p>
+<p>문의: <a href="mailto:hi.k.ai@icloud.com">hi.k.ai@icloud.com</a>. 민감한 원문, 비밀번호, 인증 토큰, 정확한 위치나 아동 미디어는 메일에 넣지 마세요.</p>
+<h2>9. 변경과 공개 전 확인</h2>
+<p>앱의 실제 데이터 흐름이 바뀌면 이 문서와 App Store Connect의 App Privacy 답변을 함께 갱신해야 합니다. 공개 배포 전 운영자 연락처 수신 여부, 앱 안 정책 링크, 삭제 동작과 제3자 정책을 사람이 다시 검토합니다.</p>
+<nav class="nav" aria-label="문서 탐색"><a href="../">앱 안내</a><a href="./">개인정보처리방침</a><a href="../support/">지원</a><a href="../data-deletion/">데이터 삭제</a><a href="../../">전체 앱</a></nav>
+<footer>tedyway 운영자 · 시행일 2026-07-15</footer>
+</article>
+    </main>
+  </body>
+</html>

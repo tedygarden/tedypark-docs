@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Walkmin 개인정보 처리와 삭제 경계" />
+    <title>Walkmin 개인정보처리방침</title>
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <!-- Generated from content/apps.json; edit the source, not this file. -->
+    <main class="shell">
+      <article class="doc">
+<p class="eyebrow">Walkmin · Privacy</p>
+<h1>개인정보처리방침</h1>
+<p class="summary"><strong>요약:</strong> 이 문서는 Walkmin의 현재 구현에서 데이터가 기기, Apple 서비스, 외부 제공자 중 어디에서 처리되는지 구분합니다. 확인되지 않은 보관 기간이나 삭제 보장은 만들지 않습니다.</p>
+
+<dl class="metadata"><div><dt>앱</dt><dd>Walkmin</dd></div><div><dt>번들 ID</dt><dd>com.tedypark.walkmin.walklab</dd></div><div><dt>플랫폼</dt><dd>iOS</dd></div><div><dt>운영 주체</dt><dd>tedyway 운영자</dd></div><div><dt>시행일</dt><dd>2026-07-15</dd></div></dl>
+<h2>1. 적용 범위와 계정</h2>
+<p>오늘의 걸음 수를 게임 진행에 반영하고, 사용자가 선택하면 지도·사진·알림·Game Center 기능을 제공합니다.</p>
+<p>tedyway 자체 계정, 개발자 운영 서버, 광고 계정은 없습니다. Game Center를 쓰는 경우 사용자의 Apple 계정이 사용됩니다.</p>
+<h2>2. 기기에서 처리·보관하는 데이터</h2>
+<ul><li>게임 상태, 오늘·주간 걸음 합계, 14일까지의 일일 기록과 설정을 Application Support·UserDefaults에 저장합니다.</li><li>위치 권한을 켜고 지도 화면을 사용하는 동안 산책 자취와 발견 지점을 메모리에서 계산합니다. 현재 구현은 좌표·경로를 영구 저장하지 않습니다.</li><li>PhotoKit으로 날짜별 사진의 썸네일을 표시하지만 원본을 복사·수정·업로드하지 않습니다.</li></ul>
+<h2>3. Apple 서비스와 private 데이터 경계</h2>
+<ul><li>Core Motion에서 걸음 수를 읽고 Core Location에서 사용 중 위치를 받습니다.</li><li>PhotoKit은 사용자가 허용한 사진을 조회하고, 로컬 알림은 저녁 산책 알림을 기기에 예약합니다.</li><li>Game Center에 로그인한 사용자는 총 걸음·주간 걸음 점수를 Apple 리더보드에 제출할 수 있습니다. tedyway 운영자 서버는 점수나 Game Center 계정을 받지 않습니다.</li></ul>
+<h2>4. 외부 서비스와 전송</h2>
+<ul><li>현재 검증한 앱 런타임에는 개발자 운영 서버, 제3자 광고·분석 SDK로 게임·위치·사진 데이터를 보내는 경로가 없습니다.</li><li>MapKit, Core Motion, PhotoKit, 알림과 Game Center는 Apple 서비스 경계에서 동작하며 Apple 정책과 사용자 기기 설정을 따릅니다.</li></ul>
+<p class="source-links">제공자 문서: <a href="https://www.apple.com/legal/privacy/kr/" rel="noopener noreferrer">Apple 개인정보 보호</a></p>
+<h2>5. 이용 목적</h2>
+<p>위 데이터는 각 항목에 적은 앱 기능과 사용자의 선택을 처리하는 데 사용됩니다. 이 앱에 존재하지 않는 계정·동기화 목적이나 현재 구현에서 확인되지 않은 광고·추적·판매 목적을 이 문서가 새로 부여하지 않습니다.</p>
+<h2>6. 보관</h2>
+<ul><li>게임·걸음 상태는 사용자가 게임을 초기화하거나 로컬 앱 데이터가 제거될 때까지 기기에 남습니다.</li><li>위치 자취는 현재 세션 메모리에만 있고 영구 저장하지 않습니다.</li><li>사진 원본과 Game Center 리더보드 기록은 앱 로컬 데이터가 아니며 각각 사진 보관함과 Apple Game Center에서 관리됩니다.</li></ul>
+<h2>7. 삭제와 사용자 선택</h2>
+<ul><li>앱의 ‘초기화’로 저장된 게임 상태를 새 상태로 바꿉니다.</li><li>저녁 알림을 끄고 iOS 설정에서 Motion·위치·사진 권한을 철회합니다.</li><li>앱을 삭제해 남은 로컬 앱 컨테이너를 제거합니다.</li><li>Game Center 점수·계정 자료는 Apple의 Game Center 설정과 지원 경로에서 별도로 관리합니다.</li></ul>
+<ul><li>앱 초기화는 사진 보관함 원본이나 Apple Game Center 자료를 삭제하지 않습니다.</li><li>앱 삭제도 Game Center 리더보드 기록 삭제를 의미하지 않습니다.</li><li>tedyway 운영자는 Apple 계정 경계의 Game Center 데이터를 직접 조회·삭제할 수 없습니다.</li></ul>
+<p><a class="button-link" href="../data-deletion/">데이터 삭제 안내 보기</a></p>
+<h2>8. 권리와 문의</h2>
+<p>사용자는 적용되는 법령에 따라 자신의 정보에 대한 열람, 정정·삭제, 처리 정지 또는 동의 철회를 문의할 수 있습니다. Apple 또는 위에 적은 외부 제공자가 직접 관리하는 영역은 해당 제공자의 설정과 정책도 함께 사용해야 합니다.</p>
+<p>문의: <a href="mailto:hi.k.ai@icloud.com">hi.k.ai@icloud.com</a>. 민감한 원문, 비밀번호, 인증 토큰, 정확한 위치나 아동 미디어는 메일에 넣지 마세요.</p>
+<h2>9. 변경과 공개 전 확인</h2>
+<p>앱의 실제 데이터 흐름이 바뀌면 이 문서와 App Store Connect의 App Privacy 답변을 함께 갱신해야 합니다. 공개 배포 전 운영자 연락처 수신 여부, 앱 안 정책 링크, 삭제 동작과 제3자 정책을 사람이 다시 검토합니다.</p>
+<nav class="nav" aria-label="문서 탐색"><a href="../">앱 안내</a><a href="./">개인정보처리방침</a><a href="../support/">지원</a><a href="../data-deletion/">데이터 삭제</a><a href="../../">전체 앱</a></nav>
+<footer>tedyway 운영자 · 시행일 2026-07-15</footer>
+</article>
+    </main>
+  </body>
+</html>

@@ -3,25 +3,32 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>오늘아이</title>
+    <meta name="description" content="보호자가 아이의 하루를 기록하고 AI로 정리하는 내부 베타 앱" />
+    <title>오늘아이 정책·지원</title>
     <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
+    <!-- Generated from content/apps.json; edit the source, not this file. -->
     <main class="shell">
-      <section class="hero">
-        <p class="eyebrow">오늘아이 · OneulAi</p>
-        <h1>아이의 하루를<br>기록합니다.</h1>
-        <p class="lead">
-          오늘아이는 촬영 시간 기반으로 하루 사진과 영상을 정리하고,
-          AI 발달 분석으로 육아 기록을 일기로 만들어주는 iOS 앱입니다.
-        </p>
-        <div class="nav">
-          <a href="privacy/">개인정보처리방침</a>
-          <a href="terms/">이용약관</a>
-          <a href="../support/">고객지원</a>
-          <a href="../">정책 홈</a>
-        </div>
-      </section>
+      <article class="doc">
+<p class="eyebrow">오늘아이 · 정책·지원</p>
+<h1>오늘아이</h1>
+<p class="lead">보호자가 아이의 하루를 기록하고 AI로 정리하는 내부 베타 앱</p>
+<p>보호자가 선택한 사진·동영상과 아이 프로필을 이용해 하루 기록과 AI 분석 결과를 만듭니다. AI 결과는 참고 정보이며 의료 진단이 아닙니다.</p>
+<aside class="notice" role="note"><strong>출시 상태 고지</strong><p>이 문서는 다음 sol 후보의 계약입니다. 현재 내부 TestFlight 1.0 (260613.203453)은 이전 구현으로, 앱에서 Gemini에 직접 미디어를 보내고 Firebase Remote Config를 초기화할 수 있어 이 문서와 동일한 흐름으로 간주하면 안 됩니다. 새 입력을 중지하고 legacy build를 회수하거나 별도 정책으로 덮은 뒤 검증해야 합니다. 동영상 임시 Storage 고아 객체 정리와 계정 삭제 purge worker의 E2E 증거도 없으므로 새 TestFlight·App Store 업로드를 모두 차단합니다.</p></aside>
+<dl class="metadata"><div><dt>앱</dt><dd>오늘아이</dd></div><div><dt>번들 ID</dt><dd>app.tedypark.oneulai</dd></div><div><dt>플랫폼</dt><dd>iOS</dd></div><div><dt>운영 주체</dt><dd>tedyway 운영자</dd></div><div><dt>시행일</dt><dd>2026-07-15</dd></div></dl>
+<h2>계정</h2>
+<p>Sign in with Apple 또는 이메일 기반 계정을 사용하며 Supabase Auth에서 인증합니다. 아동은 직접 계정을 만들 수 없고, 성인 보호자가 자신의 계정으로 동의 후 관리해야 합니다.</p>
+<h2>데이터 경계 한눈에 보기</h2>
+<div class="card-grid">
+  <section class="card"><h3>기기 안</h3><p>기기 사진 보관함의 원본은 Apple Photos에 남고, 앱은 권한 범위에서 선택한 미디어와 로컬 식별자·촬영 시각·포함된 GPS 메타데이터를 읽습니다.</p></section>
+  <section class="card"><h3>Apple 영역</h3><p>Sign in with Apple, Photos와 iCloud 공유 보관함, APNS 푸시, StoreKit 구매 기능을 사용할 수 있습니다.</p></section>
+  <section class="card"><h3>외부 서비스</h3><p>현재 활성 내부 TestFlight 1.0 (260613.203453)은 다음 sol 후보보다 오래된 legacy build입니다. 선택한 미디어를 앱에서 Google Gemini로 직접 보낼 수 있고 Firebase Remote Config를 초기화할 수 있으므로, 회수·만료 또는 별도 검증 전에는 새 개인정보를 입력하지 않습니다.</p></section>
+</div>
+<p class="muted">앱 삭제, 운영자 서버 삭제, Apple 또는 외부 제공자 데이터 삭제는 서로 같은 작업이 아닐 수 있습니다. 이 앱에 실제로 해당하는 범위는 개인정보처리방침과 데이터 삭제 안내를 확인하세요.</p>
+<nav class="nav" aria-label="문서 탐색"><a href="./">앱 안내</a><a href="privacy/">개인정보처리방침</a><a href="terms/">이용약관</a><a href="support/">지원</a><a href="delete-account/">데이터 삭제</a><a href="../">전체 앱</a></nav>
+<footer>tedyway 운영자 · <a href="mailto:hi.k.ai@icloud.com">hi.k.ai@icloud.com</a> · 시행일 2026-07-15</footer>
+</article>
     </main>
   </body>
 </html>
