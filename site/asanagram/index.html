@@ -16,18 +16,18 @@
 <p class="lead">Asana의 업무 활동을 개인 피드로 정리하는 앱</p>
 <p>Asana에서 사용자가 볼 수 있는 태스크, 댓글, 반응과 팀 활동을 불러와 읽음 상태·북마크·개인 그룹과 함께 보여줍니다.</p>
 
-<dl class="metadata"><div><dt>앱</dt><dd>Asanagram</dd></div><div><dt>번들 ID</dt><dd>app.tedypark.asanagram</dd></div><div><dt>플랫폼</dt><dd>iOS · macOS</dd></div><div><dt>운영 주체</dt><dd>tedyway 운영자</dd></div><div><dt>시행일</dt><dd>2026-07-15</dd></div></dl>
+<dl class="metadata"><div><dt>앱</dt><dd>Asanagram</dd></div><div><dt>번들 ID</dt><dd>app.tedypark.asanagram</dd></div><div><dt>플랫폼</dt><dd>iOS · macOS</dd></div><div><dt>운영 주체</dt><dd>tedyway 운영자</dd></div><div><dt>시행일</dt><dd>2026-08-10</dd></div></dl>
 <h2>계정</h2>
-<p>tedyway 자체 계정은 만들지 않습니다. Asana 계정과 Personal Access Token(PAT)이 필요하며, 기기 간 동기화를 켜면 사용자의 Apple ID가 사용됩니다.</p>
+<p>tedyway 자체 계정은 만들지 않습니다. Asana 계정과 Personal Access Token(PAT)이 필요합니다. CloudKit 권한이 있는 배포판에서 연결하고 Apple ID로 iCloud를 사용할 수 있으면 개인 상태 동기화를 자동으로 시도합니다.</p>
 <h2>데이터 경계 한눈에 보기</h2>
 <div class="card-grid">
-  <section class="card"><h3>기기 안</h3><p>Asana 태스크 이름·설명, 댓글 본문, 작성자·담당자·프로젝트·첨부·반응 정보와 AI 생성 결과를 포함한 화면 표시용 캐시</p></section>
-  <section class="card"><h3>Apple 영역</h3><p>PAT는 Apple Keychain의 동기화 항목으로 저장될 수 있습니다.</p></section>
+  <section class="card"><h3>기기 안</h3><p>Asana 태스크 이름·설명, 댓글 본문, 작성자·담당자·프로젝트·첨부·반응 정보와 Asana가 제공한 작성자 아바타를 포함한 화면 표시용 캐시</p></section>
+  <section class="card"><h3>Apple 영역</h3><p>PAT는 이 기기의 동기화되지 않는 Apple Keychain 항목에만 저장하며 iCloud Keychain, CloudKit 또는 iCloud KVS로 보내지 않습니다. Mac과 iPhone은 각각 연결해야 합니다.</p></section>
   <section class="card"><h3>외부 서비스</h3><p>Asana API: PAT 권한 범위 안의 워크스페이스·사용자·팀과 태스크 이름·설명, 댓글 본문, 첨부·반응 정보를 조회하고, 사용자가 명시적으로 실행한 댓글·좋아요·완료 등의 작업을 반영합니다.</p></section>
 </div>
 <p class="muted">앱 삭제, 운영자 서버 삭제, Apple 또는 외부 제공자 데이터 삭제는 서로 같은 작업이 아닐 수 있습니다. 이 앱에 실제로 해당하는 범위는 개인정보처리방침과 데이터 삭제 안내를 확인하세요.</p>
-<nav class="nav" aria-label="문서 탐색"><a href="./">앱 안내</a><a href="privacy/">개인정보처리방침</a><a href="support/">지원</a><a href="data-deletion/">데이터 삭제</a><a href="../">전체 앱</a></nav>
-<footer>tedyway 운영자 · <a href="mailto:hi.k.ai@icloud.com">hi.k.ai@icloud.com</a> · 시행일 2026-07-15</footer>
+<nav class="nav" aria-label="문서 탐색"><a href="./">앱 안내</a><a href="privacy/">개인정보처리방침</a><a href="terms/">이용약관</a><a href="support/">지원</a><a href="data-deletion/">데이터 삭제</a><a href="../">전체 앱</a></nav>
+<footer>tedyway 운영자 · <a href="mailto:hi.k.ai@icloud.com">hi.k.ai@icloud.com</a> · 시행일 2026-08-10</footer>
 </article>
     </main>
   </body>
