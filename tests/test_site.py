@@ -62,6 +62,7 @@ class ManifestTests(unittest.TestCase):
         self.assertEqual(CONTENT["operator"], "tedyway 운영자")
         self.assertEqual(CONTENT["contact"], "hi.k.ai@icloud.com")
         self.assertEqual(CONTENT["effective_date"], "2026-07-15")
+        self.assertEqual(APPS["asanagram"]["effective_date"], "2026-08-10")
 
     def test_app_and_bundle_matrix_is_exact(self) -> None:
         self.assertEqual(set(APPS), set(EXPECTED_BUNDLES))
@@ -107,14 +108,19 @@ class GeneratedSiteTests(unittest.TestCase):
             for route in routes:
                 expected.add(SITE / alias / route / "index.html")
         self.assertEqual(set(html_files()), expected)
-        self.assertEqual(len(expected), 41)
+        self.assertEqual(len(expected), 42)
 
     def test_canonical_pages_have_identity_date_and_exact_contact(self) -> None:
         for path in canonical_files():
             text = path.read_text(encoding="utf-8")
             with self.subTest(path=path.relative_to(ROOT)):
                 self.assertIn("tedyway 운영자", text)
-                self.assertIn("2026-07-15", text)
+                expected_date = (
+                    "2026-08-10"
+                    if path.is_relative_to(SITE / "asanagram")
+                    else "2026-07-15"
+                )
+                self.assertIn(expected_date, text)
                 self.assertIn("hi.k.ai@icloud.com", text)
                 self.assertIn('lang="ko"', text)
                 self.assertIn("Generated from content/apps.json", text)
@@ -126,10 +132,12 @@ class GeneratedSiteTests(unittest.TestCase):
                 path = SITE / slug / route / "index.html"
                 with self.subTest(path=path.relative_to(ROOT)):
                     self.assertIn(bundle, path.read_text(encoding="utf-8"))
-        self.assertIn(
-            EXPECTED_BUNDLES["oneulai"],
-            (SITE / "oneulai/terms/index.html").read_text(encoding="utf-8"),
-        )
+        for slug, app in APPS.items():
+            if app.get("terms"):
+                self.assertIn(
+                    EXPECTED_BUNDLES[slug],
+                    (SITE / slug / "terms/index.html").read_text(encoding="utf-8"),
+                )
 
     def test_aliases_redirect_to_canonical_pages(self) -> None:
         for alias, canonical in EXPECTED_ALIASES.items():
@@ -184,15 +192,17 @@ class GeneratedSiteTests(unittest.TestCase):
         self.assertNotIn("https://www.apple.com/legal/privacy/ko/", generated)
         self.assertIn("https://www.apple.com/legal/privacy/kr/", generated)
 
-    def test_asanagram_spotlight_is_opt_in_bounded_reconciled_and_deletable(self) -> None:
+    def test_asanagram_release_privacy_and_deletion_contract_is_current(self) -> None:
         privacy = (SITE / "asanagram/privacy/index.html").read_text(encoding="utf-8")
         deletion = (SITE / "asanagram/data-deletion/index.html").read_text(encoding="utf-8")
         support = (SITE / "asanagram/support/index.html").read_text(encoding="utf-8")
-        rendered = "\n".join((privacy, deletion, support))
+        terms = (SITE / "asanagram/terms/index.html").read_text(encoding="utf-8")
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        evidence = (ROOT / "docs/source-evidence.md").read_text(encoding="utf-8")
+        rendered = "\n".join((privacy, deletion, support, readme, evidence))
         for required in (
             "태스크 이름·설명",
             "댓글 본문",
-            "AI 생성 결과",
             "기본적으로 꺼져",
             "iCloud로 동기화되지 않습니다",
             "명시적으로 켜고",
@@ -203,6 +213,16 @@ class GeneratedSiteTests(unittest.TestCase):
             "활동·작성자·프로젝트",
             "Asana 링크",
             "중복을 제거",
+            "동기화되지 않는 Apple Keychain",
+            "iCloud Keychain, CloudKit 또는 iCloud KVS로 보내지 않습니다",
+            "현재 Asana 사용자와 워크스페이스 범위로 분리",
+            "배포 Release에서는 AI 요약·인물분석",
+            "사용자 지정 백엔드 경유 기능을 비활성화",
+            "임의의 외부 링크 대상 페이지와 본문·첨부 이미지는 자동으로 불러오지 않습니다",
+            "인증된 Asana API로 메타데이터를 자동 보강",
+            "작성자 아바타는 Asana API가 제공한 HTTPS 이미지 주소에서 자동으로",
+            "Sparkle이 GitHub Releases의 서명된 appcast를 자동으로 확인",
+            "자동 설치는 하지 않으며",
         ):
             self.assertIn(required, privacy)
         for required in (
@@ -211,28 +231,67 @@ class GeneratedSiteTests(unittest.TestCase):
             "조정 시점부터 30일",
             "비동기 요청",
             "실제 기기",
-            "기기 로컬 opt-out",
-            "토큰을 교체하거나",
-            "직렬 처리",
-            "삭제 요청으로 수렴",
-            "다음 앱 시작·새로고침 같은 후속 조정에서 다시 시도",
-            "현재·이전 서비스 이름의 Keychain",
+            "연결 및 데이터 삭제",
+            "이 기기 연결만 해제",
+            "iCloud 동기화 데이터까지 삭제",
+            "피드 캐시",
+            "이미지 캐시",
+            "현재 Asana 사용자·워크스페이스 범위의 Asanagram private CloudKit 상태",
+            "완료로 표시하지 않고 복구 상태를 유지",
+            "다른 Mac 또는 iPhone에서도 ‘이 기기 연결만 해제’를 각각 실행",
+            "Asana 계정이나 원본 태스크·댓글을 삭제하지 않습니다",
+            "다른 기기에 남은 로컬 캐시와 기기별 PAT는 원격으로 지울 수 없습니다",
             "ASANA_PAT",
-            ".env 자동 사용",
-            "명시적 토큰 저장 전까지 계속 차단",
-            "외부 환경변수나 .env 파일 자체를 지울 수 없",
-            "Spotlight 검색 결과의 열기 요청도 무시",
-            "한 번에 모두 지우는 기능이 없습니다",
+            "배포 Release는 이 fallback을 읽지 않습니다",
         ):
             self.assertIn(required, deletion)
-        self.assertIn("삭제 실패 문구", support)
+        self.assertIn("PAT 자체는 기기 간 동기화하지 않습니다", support)
+        self.assertIn("완료되지 않았다는 문구", support)
+        self.assertIn("봇/봇 아님 사용자 분류", privacy)
+        self.assertIn("읽음 영수증은 60일·최대 5,000개", privacy)
+        self.assertIn("최근 본 항목은 기기 로컬에서 최대 1,000개", privacy)
+        self.assertIn("나이만으로 지우지 않고", privacy)
+        self.assertIn("반응 20,000개·관측 태스크 10,000개", privacy)
+        for required in (
+            "무료 사내 베타",
+            "조직 내부 승인을 받아야 합니다",
+            "공식 알림, 감사 로그",
+            "PAT는 비밀번호에 준하는 인증정보",
+            "중요한 작업의 최종 상태는 Asana에서 확인",
+            "AI 요약·인물분석과 사용자 지정 백엔드를 비활성화",
+            "Asana 서비스 밖에서 Asanagram이 처리하는 사용자 콘텐츠",
+            "타인 감시·순위화 또는 인사 불이익",
+            "현재 사내 베타는 무료",
+            "Asana, Inc.와 제휴하거나 Asana가 보증하는 제품이 아닙니다",
+        ):
+            self.assertIn(required, terms)
+        self.assertNotIn("최근 본", APPS["asanagram"]["apple_services"][1])
+        self.assertIn("최근 본", APPS["asanagram"]["local_data"][1])
+        self.assertIn("**Asanagram**: 설정에서 이 기기 연결만 해제", readme)
+        self.assertIn("배포 Release의 AI·인물분석·사용자 지정 백엔드는 비활성", evidence)
         for stale in (
+            "AI 생성 결과",
+            "선택적 macOS AI",
+            "별도 백엔드 URL",
+            "PAT는 Apple Keychain의 동기화 항목으로 저장될 수 있습니다",
             "Core Spotlight에 자동 색인",
             "만료일 없이",
             "색인 전체 삭제 버튼이 없습니다",
             "opt-in 또는 앱 안 전체 삭제 기능이 없습니다",
+            "한 번에 모두 지우는 기능이 없습니다",
         ):
             self.assertNotIn(stale, rendered)
+
+        self.assertIn(
+            "https://asana.com/terms/privacy-statement",
+            privacy,
+        )
+        self.assertNotIn("https://asana.com/terms#privacy-policy", privacy)
+        legal_terms = (SITE / "legal/terms/index.html").read_text(encoding="utf-8")
+        self.assertIn("앱별 이용약관이 있는 경우 이 목록에서 공개합니다", legal_terms)
+        self.assertIn("Asanagram 이용약관", legal_terms)
+        self.assertIn("오늘아이 이용약관", legal_terms)
+        self.assertNotIn("계정형 앱은 오늘아이", legal_terms)
 
     def test_moksori_discloses_opt_in_transfer_and_release_blocker(self) -> None:
         text = (SITE / "moksori/privacy/index.html").read_text(encoding="utf-8")

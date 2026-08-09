@@ -1,6 +1,9 @@
 # 정책 근거와 공개 전 수동 검토 게이트
 
-요약: 페이지는 2026-07-15 `sol` 구현과 배포 설정에서 확인한 사실만 반영했다. 확인하지 못한 국가, 제공자 보관 기간, DPA 체결, 삭제 완료 기한이나 보증을 만들지 않았다. **코드 검증은 법률 검토를 대체하지 않으며, 아래 수동 게이트를 통과하기 전 `main`에 공개하면 안 된다.**
+요약: 페이지는 2026-07-15 `sol` 구현과 배포 설정에서 확인한 사실을 기준으로 하며,
+Asanagram은 2026-08-09 Release 구현을 다시 대조했다. 확인하지 못한 국가, 제공자 보관 기간,
+DPA 체결, 삭제 완료 기한이나 보증을 만들지 않았다. **코드 검증은 법률 검토를 대체하지 않으며,
+아래 수동 게이트를 통과하기 전 공개·유료 출시 승인으로 간주하면 안 된다.**
 
 ## 공식 기준
 
@@ -21,13 +24,25 @@
 
 법령·지침의 최신성, 서비스에 실제 적용되는 조항, 운영자 표시와 국외 이전 고지는 공개 직전 전문가 또는 책임자가 다시 판단한다.
 
+### Asana
+
+- [Personal access token](https://developers.asana.com/docs/personal-access-token): 사용자를 대신해
+  Asana 데이터를 읽거나 변경하는 앱은 공개 전에 OAuth를 사용한다.
+- [Developer Terms](https://asana.com/terms/developer-terms): 앱 이용약관·개인정보처리방침을
+  사용자가 찾을 수 있는 곳에 표시하고, User Content 처리 전 명시적 동의와 보안·출처 표시를
+  갖춘다. 앱 전체 요금과 API 기능 사용료는 같은 의미가 아니며, API 기능의 사용·접근에 직접
+  또는 간접 과금하려면 Asana의 사전 명시적 서면 동의를 확보한다.
+
+위 문서는 변경될 수 있다. 이 정책 사이트의 Asanagram 이용약관은 무료 사내 베타용 공학
+초안이며, 공개·유료 출시의 법률·브랜드·유료화 승인을 대신하지 않는다.
+
 ## 앱별 구현 근거 스냅샷
 
 아래 경로는 정책 저장소와 나란히 감사한 각 앱의 `sol` worktree 기준이다. 원본 코드를 정책 저장소로 복사하지 않았다.
 
 | 앱 / 번들 ID | 확인한 경계 | 주요 근거 |
 |---|---|---|
-| Asanagram / `app.tedypark.asanagram` | Asana PAT는 Keychain, 피드 캐시는 로컬, 개인 상태는 private CloudKit, 선택적 macOS AI는 설치된 CLI 경유. Core Spotlight는 기기별 기본 OFF opt-in이며 같은 도메인을 삭제 후 최대 2,000개로 교체 | `asanagram-sol/README.md`, `Asanagram.entitlements`, `Sources/Kit/AIService.swift`, `FeedStore+Sync.swift`, `Spotlight.swift`, `SpotlightPrivacyPolicy.swift`, `FeedStore.swift`, `TokenStore.swift`, `RootView.swift` |
+| Asanagram / `app.tedypark.asanagram` | PAT는 동기화되지 않는 기기별 Keychain에만 저장. 계정 범위 개인 상태는 private CloudKit, 작은 동기화 기준은 KVS. 배포 Release의 AI·인물분석·사용자 지정 백엔드는 비활성. Core Spotlight는 기기별 기본 OFF opt-in이고 최대 2,000개. 설정은 이 기기 연결 해제와 현재 접근 가능한 CloudKit 계정 범위 포함 삭제를 구분하며 필요한 삭제 실패를 완료로 표시하지 않음 | `asanagram/README.md`, `Asanagram.entitlements`, `Sources/Kit/DistributionPrivacyPolicy.swift`, `FeedStore+Sync.swift`, `Spotlight.swift`, `SpotlightPrivacyPolicy.swift`, `FeedStore.swift`, `TokenStore.swift`, `SettingsView.swift`, `OnboardingView.swift` |
 | 마당 / `app.tedypark.heimdall` | 공개 커뮤니티 URLSession·WKWebView, 기본 WebKit 쿠키, 글 보관본 로컬+private CloudKit, 개발자 백엔드 없음 | `heimdall-sol/docs/specs/0002-cloudkit-sync.md`, `0006-sol-reader-hardening.md`, `SiteRegistry.swift`, `WebFallbackView.swift` |
 | 목소리 / `app.tedypark.moksori` | 시스템·Personal Voice는 기기, 문구·히스토리는 SwiftData/App Group, opt-in 때 문장을 Bing speech endpoint로 보내고 MP3 캐시 | `moksori-sol/docs/privacy-contract.md`, `docs/release/privacy-review-checklist.md`, `EdgeTTS.swift`, 앱 Privacy manifest |
 | Walkmin / `com.tedypark.walkmin.walklab` | Core Motion·사용 중 위치·PhotoKit·로컬 알림·Game Center, 게임/걸음은 로컬, 위치 자취는 메모리 | `picmin-sol/Docs/Reports/2026-07-14-sol-privacy-contract.md`, `WalkLocationProvider.swift`, `GameCenterService.swift`, Privacy manifest |
@@ -42,7 +57,8 @@
    - `hi.k.ai@icloud.com`의 수신·답장·스팸함을 실제로 시험하고 지원 책임자를 정한다.
    - 존재하지 않거나 모니터링하지 않는 `@tedypark.com`, 회사명, 주소를 만들지 않는다.
 2. **앱 안 접근성과 URL**
-   - 각 배포 바이너리 설정 화면에서 해당 개인정보처리방침과 지원·삭제 URL을 쉽게 열 수 있는지 실기기로 확인한다.
+   - 각 배포 바이너리 설정 화면에서 해당 개인정보처리방침과 이용약관(제공되는 앱),
+     지원·삭제 URL을 쉽게 열 수 있는지 실기기로 확인한다.
    - App Store Connect의 Support URL·Privacy Policy URL이 정확한 앱 경로이고 HTTPS로 공개되는지 확인한다.
 3. **App Privacy와 바이너리**
    - archive Privacy Report, 포함된 SDK·entitlement·네트워크 캡처를 다시 보고 App Privacy 답변과 문구를 맞춘다.
@@ -60,7 +76,10 @@
    - 독립 앱에서 `speech.platform.bing.com` endpoint를 쓰는 현행 약관·라이선스·상표 근거 또는 서면 허가를 확보한다.
    - 전송 문장·IP·요청 메타데이터의 처리 지역·기간·재위탁을 확인한다. 확인하지 못하면 프로덕션에서 온라인 기능을 제거하거나 비활성화한다.
 7. **Apple private 데이터 삭제 UX**
-   - Asanagram·마당·Quad Do의 전체 로컬/Keychain/private CloudKit 삭제 기능 부재를 제품 백로그 P0/P1로 유지한다.
+   - Asanagram의 ‘이 기기 연결만 해제’와 ‘iCloud 동기화 데이터까지 삭제’를 구분하고, 어느
+     경로도 다른 기기의 로컬 자료·기기별 PAT와 Asana 원본을 지운다고 표현하지 않는다. 실패
+     화면과 재시도·재실행 복구를 iOS·macOS 실기기에서 검증한다.
+   - 마당·Quad Do의 전체 로컬/Keychain/private CloudKit 삭제 기능 부재는 제품 백로그 P0/P1로 유지한다.
    - 앱 삭제만으로 private CloudKit·Keychain 자료도 삭제된다고 안내하지 않는다.
    - Asanagram의 Core Spotlight 기본 OFF·동의·삭제·재시도·토큰 교체 경로는 시뮬레이터 단위 테스트만으로 완료로 간주하지 않고, 실제 iOS·macOS 기기에서 색인 생성·만료·삭제와 검색 결과 열기 차단을 확인한다.
 8. **최종 법률·문안 검토**

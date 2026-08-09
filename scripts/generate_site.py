@@ -18,8 +18,9 @@ GENERATED_MARKER = "Generated from content/apps.json; edit the source, not this 
 
 PROVIDER_LINKS: dict[str, list[tuple[str, str]]] = {
     "asanagram": [
-        ("Asana 개인정보 안내", "https://asana.com/terms#privacy-policy"),
+        ("Asana 개인정보 안내", "https://asana.com/terms/privacy-statement"),
         ("Apple 개인정보 보호", "https://www.apple.com/legal/privacy/kr/"),
+        ("GitHub 개인정보 안내", "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"),
     ],
     "madang": [("Apple 개인정보 보호", "https://www.apple.com/legal/privacy/kr/")],
     "moksori": [
@@ -67,13 +68,17 @@ def list_html(items: Iterable[str]) -> str:
     return "<ul>" + "".join(f"<li>{escape(item)}</li>" for item in items) + "</ul>"
 
 
+def effective_date(app: dict[str, Any], content: dict[str, Any]) -> str:
+    return str(app.get("effective_date", content["effective_date"]))
+
+
 def metadata_rows(app: dict[str, Any], content: dict[str, Any]) -> str:
     rows = [
         ("앱", app["name"]),
         ("번들 ID", app["bundle_id"]),
         ("플랫폼", app["platforms"]),
         ("운영 주체", content["operator"]),
-        ("시행일", content["effective_date"]),
+        ("시행일", effective_date(app, content)),
     ]
     return '<dl class="metadata">' + "".join(
         f"<div><dt>{escape(key)}</dt><dd>{escape(value)}</dd></div>" for key, value in rows
@@ -163,7 +168,7 @@ def app_landing(app: dict[str, Any], content: dict[str, Any]) -> tuple[str, str]
 </div>
 <p class="muted">앱 삭제, 운영자 서버 삭제, Apple 또는 외부 제공자 데이터 삭제는 서로 같은 작업이 아닐 수 있습니다. 이 앱에 실제로 해당하는 범위는 개인정보처리방침과 데이터 삭제 안내를 확인하세요.</p>
 {nav_html(current_file, app, include_terms=bool(app.get('terms')))}
-<footer>{escape(content['operator'])} · <a href="mailto:{escape(content['contact'])}">{escape(content['contact'])}</a> · 시행일 {escape(content['effective_date'])}</footer>
+<footer>{escape(content['operator'])} · <a href="mailto:{escape(content['contact'])}">{escape(content['contact'])}</a> · 시행일 {escape(effective_date(app, content))}</footer>
 </article>"""
     return current_file, page(
         current_file=current_file,
@@ -205,7 +210,7 @@ def app_privacy(app: dict[str, Any], content: dict[str, Any]) -> tuple[str, str]
 <h2>9. 변경과 공개 전 확인</h2>
 <p>앱의 실제 데이터 흐름이 바뀌면 이 문서와 App Store Connect의 App Privacy 답변을 함께 갱신해야 합니다. 공개 배포 전 운영자 연락처 수신 여부, 앱 안 정책 링크, 삭제 동작과 제3자 정책을 사람이 다시 검토합니다.</p>
 {nav_html(current_file, app, include_terms=bool(app.get('terms')))}
-<footer>{escape(content['operator'])} · 시행일 {escape(content['effective_date'])}</footer>
+<footer>{escape(content['operator'])} · 시행일 {escape(effective_date(app, content))}</footer>
 </article>"""
     return current_file, page(
         current_file=current_file,
@@ -237,7 +242,7 @@ def app_support(app: dict[str, Any], content: dict[str, Any]) -> tuple[str, str]
 <h2>보안</h2>
 <p>비밀번호, 인증 토큰 등 민감정보를 메일에 보내지 마세요. 위 앱별 확인 사항에 적은 민감 데이터는 가리고, 가능한 경우 임의의 재현 데이터와 비식별 화면을 사용하세요.</p>
 {nav_html(current_file, app, include_terms=bool(app.get('terms')))}
-<footer>{escape(content['operator'])} · <a href="mailto:{escape(content['contact'])}">{escape(content['contact'])}</a> · 시행일 {escape(content['effective_date'])}</footer>
+<footer>{escape(content['operator'])} · <a href="mailto:{escape(content['contact'])}">{escape(content['contact'])}</a> · 시행일 {escape(effective_date(app, content))}</footer>
 </article>"""
     return current_file, page(
         current_file=current_file,
@@ -265,7 +270,7 @@ def app_deletion(app: dict[str, Any], content: dict[str, Any]) -> tuple[str, str
 <p>상태 확인이나 접근 문제는 <a href="mailto:{escape(content['contact'])}">{escape(content['contact'])}</a>으로 문의하세요. 메일에는 비밀번호, 인증 토큰, 정확한 위치, 아동 미디어 또는 업무 원문을 넣지 마세요.</p>
 <p class="muted">서비스 계정이 없는 앱은 이메일로 ‘계정 삭제’를 요청할 대상이 없습니다. Apple 또는 외부 제공자가 직접 관리하는 영역과 앱 로컬 자료는 운영자 서버와 서로 분리될 수 있습니다. 이 앱에 해당하는 범위는 위 안내를 따르세요.</p>
 {nav_html(current_file, app, include_terms=bool(app.get('terms')))}
-<footer>{escape(content['operator'])} · 시행일 {escape(content['effective_date'])}</footer>
+<footer>{escape(content['operator'])} · 시행일 {escape(effective_date(app, content))}</footer>
 </article>"""
     return current_file, page(
         current_file=current_file,
@@ -288,12 +293,12 @@ def app_terms(app: dict[str, Any], content: dict[str, Any]) -> tuple[str, str] |
         sections.append(section_html)
     body = f"""<article class="doc">
 {heading(app, '이용약관', 'Terms')}
-<p class="summary"><strong>요약:</strong> 오늘아이는 성인 보호자가 사용하는 내부 베타입니다. AI 결과는 참고 정보이며, 개인정보와 삭제 경계는 개인정보처리방침을 따릅니다.</p>
+<p class="summary"><strong>요약:</strong> {escape(app.get('terms_summary', f"{app['name']} 이용 조건과 데이터 처리 경계를 설명합니다."))}</p>
 {notice_html(app)}
 {metadata_rows(app, content)}
 {''.join(sections)}
 {nav_html(current_file, app, include_terms=True)}
-<footer>{escape(content['operator'])} · <a href="mailto:{escape(content['contact'])}">{escape(content['contact'])}</a> · 시행일 {escape(content['effective_date'])}</footer>
+<footer>{escape(content['operator'])} · <a href="mailto:{escape(content['contact'])}">{escape(content['contact'])}</a> · 시행일 {escape(effective_date(app, content))}</footer>
 </article>"""
     return current_file, page(
         current_file=current_file,
@@ -405,7 +410,7 @@ def shared_legal(content: dict[str, Any], terms: bool) -> tuple[str, str]:
             f'<li><a href="{escape(relative_href(route, app["slug"] + suffix))}">{escape(app["name"])} {escape("이용약관" if terms else "개인정보처리방침")}</a> <code>{escape(app["bundle_id"])}</code></li>'
         )
     note = (
-        "현재 별도 서비스 이용약관이 필요한 계정형 앱은 오늘아이입니다. 다른 앱도 제3자 서비스의 약관과 Apple 조건이 별도로 적용될 수 있습니다."
+        "앱별 이용약관이 있는 경우 이 목록에서 공개합니다. 각 앱이 연결하는 제3자 서비스의 약관과 Apple 조건도 별도로 적용될 수 있습니다."
         if terms
         else "앱별 데이터 흐름이 달라 하나의 포괄 방침으로 대체하지 않습니다. App Store의 Privacy Policy URL은 해당 앱 문서에 연결해야 합니다."
     )

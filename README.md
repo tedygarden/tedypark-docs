@@ -20,10 +20,13 @@
 - 개인정보처리방침: `/<slug>/privacy/`
 - 지원: `/<slug>/support/`
 - 서비스 계정이 없는 앱의 데이터 삭제: `/<slug>/data-deletion/`
+- Asanagram 이용약관: `/asanagram/terms/`
 - 오늘아이 계정·데이터 삭제: `/oneulai/delete-account/`
 - 오늘아이 이용약관: `/oneulai/terms/`
 
-운영 주체는 `tedyway 운영자`, 시행일은 `2026-07-15`, 모니터링할 공개 연락처는 `hi.k.ai@icloud.com` 하나로 고정했다.
+운영 주체는 `tedyway 운영자`, 기본 시행일은 `2026-07-15`, 모니터링할 공개 연락처는
+`hi.k.ai@icloud.com` 하나로 고정했다. 구현을 다시 검증해 정책이 바뀐 앱은 앱별
+`effective_date`로 시행일을 덮어쓴다(Asanagram `2026-08-10`).
 
 ## 수정 방법
 
@@ -53,5 +56,9 @@ make check
 
 - **오늘아이**: 활성 내부 TestFlight `1.0 (260613.203453)`은 direct Gemini/Firebase가 남은 legacy 흐름이라 다음 `sol` 계약과 같다고 간주하지 않는다. legacy 회수·정책 정합성, 동영상 임시 Storage 고아 객체 정리와 계정 삭제 purge worker E2E 증거가 끝날 때까지 새 TestFlight·App Store 업로드를 모두 차단한다. 삭제 요청 `202 Accepted`를 완료로 표현하지 않는다.
 - **목소리**: `speech.platform.bing.com` 비공식 연동의 독립 앱 사용 허가와 처리·보관 범위가 확인되지 않았다. 해결 전 프로덕션 출시를 차단한다.
-- **Asanagram·마당·Quad Do**: 앱 안에서 로컬과 private CloudKit을 한 번에 지우는 기능이 없다. 앱 삭제와 iCloud 삭제를 같은 것으로 안내하지 않는다.
+- **Asanagram**: 설정에서 이 기기 연결만 해제하거나, 이 기기 자료와 현재 접근 가능한 계정
+  범위의 private CloudKit 상태까지 삭제할 수 있다. 다른 기기의 로컬 자료와 PAT, Asana 원본은
+  별도이며 앱 삭제와 iCloud 삭제를 같은 것으로 안내하지 않는다.
+- **마당·Quad Do**: 앱 안에서 로컬과 private CloudKit을 한 번에 지우는 기능이 없다.
+  앱 삭제와 iCloud 삭제를 같은 것으로 안내하지 않는다.
 - 이 문서는 코드·설정 근거를 반영한 공학 초안이다. 법률 자문이나 App Store 승인 보장이 아니며 공개 전 운영자·연락처·법적 의무를 사람이 다시 검토해야 한다.
